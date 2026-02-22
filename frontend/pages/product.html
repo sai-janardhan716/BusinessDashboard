@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product — StartupOps</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="app-layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="sidebar-brand" href="dashboard.html">
+      <div class="brand-icon"><i class='bx bxs-rocket'></i></div>
+      <span class="brand-name">StartupOps</span>
+    </a>
+    <nav class="sidebar-nav" id="sidebarMenu"></nav>
+    <div class="sidebar-user">
+      <div class="user-avatar"></div>
+      <div class="user-details">
+        <span class="user-name-display"></span>
+        <span class="user-role-display"></span>
+      </div>
+    </div>
+  </aside>
+
+  <div class="main-content">
+    <div class="page-header">
+      <div class="page-header-left">
+        <span class="page-eyebrow">Product</span>
+        <h1 class="page-title">Product Roadmap</h1>
+        <p class="page-subtitle">Feature backlog, bugs and release planning</p>
+      </div>
+      <div class="page-actions">
+        <button class="btn btn-primary" id="addProdBtn"><i class='bx bx-plus'></i> Add Item</button>
+      </div>
+    </div>
+
+    <div class="content-body">
+      <div class="kpi-grid">
+        <div class="kpi-card kpi-indigo">
+          <div class="kpi-body"><div class="kpi-label">Total Features</div><div class="kpi-value" id="totalFeatures">0</div></div>
+          <div class="kpi-icon indigo"><i class='bx bx-chip'></i></div>
+        </div>
+        <div class="kpi-card kpi-green">
+          <div class="kpi-body"><div class="kpi-label">Done</div><div class="kpi-value" id="doneProd">0</div></div>
+          <div class="kpi-icon green"><i class='bx bx-check-double'></i></div>
+        </div>
+        <div class="kpi-card kpi-amber">
+          <div class="kpi-body"><div class="kpi-label">In Progress</div><div class="kpi-value" id="inProgressProd">0</div></div>
+          <div class="kpi-icon amber"><i class='bx bx-loader-alt'></i></div>
+        </div>
+        <div class="kpi-card kpi-red">
+          <div class="kpi-body"><div class="kpi-label">Bugs</div><div class="kpi-value" id="bugsProd">0</div></div>
+          <div class="kpi-icon red"><i class='bx bx-bug'></i></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="toolbar">
+          <div class="search-box">
+            <i class='bx bx-search'></i>
+            <input type="text" id="prodSearch" placeholder="Search features…"/>
+          </div>
+          <select id="typeFilter" class="filter-select">
+            <option value="">All Types</option>
+            <option>Feature</option><option>Bug</option><option>Improvement</option>
+          </select>
+          <select id="statusFilter" class="filter-select">
+            <option value="">All Status</option>
+            <option>Planned</option><option>In Progress</option><option>Done</option>
+          </select>
+          <select id="priorityFilter" class="filter-select">
+            <option value="">All Priority</option>
+            <option>High</option><option>Medium</option><option>Low</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Feature</th><th>Type</th><th>Status</th><th>Priority</th><th>Owner</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="productTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="prodForm">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">Add Product Item</span>
+      <button class="modal-close" id="closeProdModal">&times;</button>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Feature Name</label><input id="pName" placeholder="Dark Mode"/></div>
+      <div class="form-group">
+        <label>Type</label>
+        <select id="pType"><option>Feature</option><option>Bug</option><option>Improvement</option></select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Status</label>
+        <select id="pStatus"><option>Planned</option><option>In Progress</option><option>Done</option></select>
+      </div>
+      <div class="form-group">
+        <label>Priority</label>
+        <select id="pPriority"><option>High</option><option>Medium</option><option>Low</option></select>
+      </div>
+    </div>
+    <div class="form-group"><label>Owner</label><input id="pOwner" placeholder="John Smith"/></div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" id="closeProdModal2">Cancel</button>
+      <button class="btn btn-primary" id="saveProd">Save Item</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/sidebar.js"></script>
+<script src="../js/product.js"></script>
+</body>
+</html>

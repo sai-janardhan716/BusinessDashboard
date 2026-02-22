@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sales — StartupOps</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="app-layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="sidebar-brand" href="dashboard.html">
+      <div class="brand-icon"><i class='bx bxs-rocket'></i></div>
+      <span class="brand-name">StartupOps</span>
+    </a>
+    <nav class="sidebar-nav" id="sidebarMenu"></nav>
+    <div class="sidebar-user">
+      <div class="user-avatar"></div>
+      <div class="user-details">
+        <span class="user-name-display"></span>
+        <span class="user-role-display"></span>
+      </div>
+    </div>
+  </aside>
+
+  <div class="main-content">
+    <div class="page-header">
+      <div class="page-header-left">
+        <span class="page-eyebrow">Sales</span>
+        <h1 class="page-title">Sales CRM</h1>
+        <p class="page-subtitle">Track deals, pipeline and client relationships</p>
+      </div>
+      <div class="page-actions">
+        <button class="btn btn-primary" id="addDealBtn"><i class='bx bx-plus'></i> Add Deal</button>
+      </div>
+    </div>
+
+    <div class="content-body">
+      <div class="kpi-grid">
+        <div class="kpi-card kpi-indigo">
+          <div class="kpi-body">
+            <div class="kpi-label">Total Pipeline</div>
+            <div class="kpi-value" id="totalPipeline">₹0</div>
+          </div>
+          <div class="kpi-icon indigo"><i class='bx bx-line-chart'></i></div>
+        </div>
+        <div class="kpi-card kpi-green">
+          <div class="kpi-body">
+            <div class="kpi-label">Won Deals</div>
+            <div class="kpi-value" id="wonDeals">0</div>
+          </div>
+          <div class="kpi-icon green"><i class='bx bx-trophy'></i></div>
+        </div>
+        <div class="kpi-card kpi-amber">
+          <div class="kpi-body">
+            <div class="kpi-label">Active Deals</div>
+            <div class="kpi-value" id="activeDeals">0</div>
+          </div>
+          <div class="kpi-icon amber"><i class='bx bx-briefcase'></i></div>
+        </div>
+        <div class="kpi-card kpi-red">
+          <div class="kpi-body">
+            <div class="kpi-label">Lost Deals</div>
+            <div class="kpi-value" id="lostDeals">0</div>
+          </div>
+          <div class="kpi-icon red"><i class='bx bx-x-circle'></i></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="toolbar">
+          <div class="search-box">
+            <i class='bx bx-search'></i>
+            <input type="text" id="dealSearch" placeholder="Search deals…"/>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Client</th><th>Deal Value</th><th>Status</th><th>Close Date</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="salesTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="dealForm">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title" id="formTitle">Add Deal</span>
+      <button class="modal-close" id="closeDealModal">&times;</button>
+    </div>
+    <div class="form-group"><label>Client Name</label><input id="cName" placeholder="Acme Corp"/></div>
+    <div class="form-group"><label>Deal Value (₹)</label><input id="cValue" type="number" placeholder="0"/></div>
+    <div class="form-group">
+      <label>Status</label>
+      <select id="cStatus"><option>Active</option><option>Won</option><option>Lost</option></select>
+    </div>
+    <div class="form-group"><label>Expected Close Date</label><input type="date" id="cDate"/></div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" id="closeDealModal2">Cancel</button>
+      <button class="btn btn-primary" id="saveDeal">Save Deal</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/sidebar.js"></script>
+<script src="../js/sales.js"></script>
+</body>
+</html>

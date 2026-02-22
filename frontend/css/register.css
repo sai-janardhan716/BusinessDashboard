@@ -1,0 +1,323 @@
+/* ════════════════════════════════════
+   REGISTER — StartupOps Dark Theme
+════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #070b14;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 16px 60px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(99,102,241,0.14) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+
+/* Page wrapper */
+.register-container {
+  width: 100%;
+  max-width: 560px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Brand header */
+.brand-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #6366f1, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-header i {
+  font-size: 1.5rem;
+  -webkit-text-fill-color: #6366f1;
+}
+
+/* Card */
+.register-card {
+  background: #0d1322;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 18px;
+  padding: 36px 32px;
+  box-shadow: 0 8px 48px rgba(0,0,0,0.5);
+}
+
+.register-card h2 {
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #f1f5f9;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: #475569;
+  margin-bottom: 28px;
+  line-height: 1.5;
+}
+
+/* Section dividers */
+.section-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6366f1;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Form layout */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+
+label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+/* Icon-prefixed inputs */
+.input-with-icon {
+  position: relative;
+}
+
+.input-with-icon i {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #475569;
+  font-size: 1.1rem;
+  pointer-events: none;
+}
+
+/* All inputs & selects */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"] {
+  width: 100%;
+  background: #111827;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 10px 13px;
+  color: #f1f5f9;
+  font-size: 0.875rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+
+/* Extra left padding for icon inputs */
+.input-with-icon input {
+  padding-left: 38px;
+}
+
+input::placeholder { color: #334155; }
+
+input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.18);
+}
+
+/* ── Officers section ─────────────────────── */
+.officer-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.officer-item {
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+/* Highlight when checked */
+.officer-item.checked {
+  border-color: rgba(99,102,241,0.4);
+  background: rgba(99,102,241,0.04);
+}
+
+/* Checkbox row — the label IS the clickable row */
+.officer-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.officer-checkbox-row input[type="checkbox"] {
+  width: 17px; height: 17px;
+  accent-color: #6366f1;
+  cursor: pointer;
+  flex-shrink: 0;
+  /* Override the generic input styles */
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+.officer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.officer-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+.officer-role-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+/* Hidden fields — shown when checked */
+.officer-fields {
+  display: none;             /* HIDDEN by default */
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 16px 16px;
+}
+
+/* JS adds .visible → show the fields */
+.officer-fields.visible {
+  display: flex;
+}
+
+/* Inputs inside officer fields */
+.officer-fields input {
+  width: 100%;
+  background: #0d1322;
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 8px;
+  padding: 9px 12px;
+  color: #f1f5f9;
+  font-size: 0.85rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+
+.officer-fields input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.18);
+}
+
+/* Submit button */
+.btn-register {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: #6366f1;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.18s;
+  margin-top: 4px;
+}
+
+.btn-register:hover {
+  background: #5254d4;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 18px rgba(99,102,241,0.35);
+}
+
+.btn-register:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Spinner inside button */
+.spinner {
+  display: inline-block;
+  width: 14px; height: 14px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Status message */
+.message {
+  margin-top: 14px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-align: center;
+  min-height: 20px;
+}
+.message.success { color: #10b981; }
+.message.error   { color: #ef4444; }
+
+/* Footer */
+.register-footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.83rem;
+  color: #475569;
+}
+.register-footer a {
+  color: #6366f1;
+  text-decoration: none;
+  font-weight: 600;
+}
+.register-footer a:hover { color: #a78bfa; }
+
+/* Responsive */
+@media (max-width: 540px) {
+  .form-row { grid-template-columns: 1fr; }
+  .register-card { padding: 24px 20px; }
+}

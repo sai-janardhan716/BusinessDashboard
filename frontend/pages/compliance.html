@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Compliance — StartupOps</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="app-layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="sidebar-brand" href="dashboard.html">
+      <div class="brand-icon"><i class='bx bxs-rocket'></i></div>
+      <span class="brand-name">StartupOps</span>
+    </a>
+    <nav class="sidebar-nav" id="sidebarMenu"></nav>
+    <div class="sidebar-user">
+      <div class="user-avatar"></div>
+      <div class="user-details">
+        <span class="user-name-display"></span>
+        <span class="user-role-display"></span>
+      </div>
+    </div>
+  </aside>
+
+  <div class="main-content">
+    <div class="page-header">
+      <div class="page-header-left">
+        <span class="page-eyebrow">Compliance</span>
+        <h1 class="page-title">Documents & Filings</h1>
+        <p class="page-subtitle">Manage compliance documents and regulatory deadlines</p>
+      </div>
+      <div class="page-actions">
+        <button class="btn btn-primary" id="addCompBtn"><i class='bx bx-plus'></i> Add Document</button>
+      </div>
+    </div>
+
+    <div class="content-body">
+      <div class="kpi-grid">
+        <div class="kpi-card kpi-indigo">
+          <div class="kpi-body"><div class="kpi-label">Total Documents</div><div class="kpi-value" id="totalDocs">0</div></div>
+          <div class="kpi-icon indigo"><i class='bx bx-file'></i></div>
+        </div>
+        <div class="kpi-card kpi-green">
+          <div class="kpi-body"><div class="kpi-label">Filed</div><div class="kpi-value" id="filedDocs">0</div></div>
+          <div class="kpi-icon green"><i class='bx bx-check-circle'></i></div>
+        </div>
+        <div class="kpi-card kpi-amber">
+          <div class="kpi-body"><div class="kpi-label">Pending</div><div class="kpi-value" id="pendingDocs">0</div></div>
+          <div class="kpi-icon amber"><i class='bx bx-time'></i></div>
+        </div>
+        <div class="kpi-card kpi-red">
+          <div class="kpi-body"><div class="kpi-label">Expired</div><div class="kpi-value" id="expiredDocs">0</div></div>
+          <div class="kpi-icon red"><i class='bx bx-error'></i></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="toolbar">
+          <div class="search-box">
+            <i class='bx bx-search'></i>
+            <input type="text" id="compSearch" placeholder="Search documents…"/>
+          </div>
+          <select id="statusFilter" class="filter-select">
+            <option value="">All Status</option>
+            <option value="Filed">Filed</option>
+            <option value="Pending">Pending</option>
+            <option value="Expired">Expired</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Document</th><th>Type</th><th>Due Date</th><th>Status</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="compTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="compForm">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">Add Document</span>
+      <button class="modal-close" id="closeCompModal">&times;</button>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Document Name</label><input id="cName" placeholder="GST Return Q1"/></div>
+      <div class="form-group">
+        <label>Type</label>
+        <select id="cType"><option>Tax Filing</option><option>License</option><option>Contract</option><option>Registration</option><option>Other</option></select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Due Date</label><input type="date" id="cDue"/></div>
+      <div class="form-group">
+        <label>Status</label>
+        <select id="cStatus"><option>Pending</option><option>Filed</option><option>Expired</option></select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" id="closeCompModal2">Cancel</button>
+      <button class="btn btn-primary" id="saveComp">Save Document</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/sidebar.js"></script>
+<script src="../js/compliance.js"></script>
+</body>
+</html>

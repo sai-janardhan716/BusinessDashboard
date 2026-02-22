@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HR — StartupOps</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="app-layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="sidebar-brand" href="dashboard.html">
+      <div class="brand-icon"><i class='bx bxs-rocket'></i></div>
+      <span class="brand-name">StartupOps</span>
+    </a>
+    <nav class="sidebar-nav" id="sidebarMenu"></nav>
+    <div class="sidebar-user">
+      <div class="user-avatar"></div>
+      <div class="user-details">
+        <span class="user-name-display"></span>
+        <span class="user-role-display"></span>
+      </div>
+    </div>
+  </aside>
+
+  <div class="main-content">
+    <div class="page-header">
+      <div class="page-header-left">
+        <span class="page-eyebrow">Human Resources</span>
+        <h1 class="page-title">Employees</h1>
+        <p class="page-subtitle">Manage your team and headcount</p>
+      </div>
+      <div class="page-actions">
+        <button class="btn btn-primary" id="addEmpBtn"><i class='bx bx-plus'></i> Add Employee</button>
+      </div>
+    </div>
+
+    <div class="content-body">
+      <div class="panel">
+        <div class="toolbar">
+          <div class="search-box">
+            <i class='bx bx-search'></i>
+            <input type="text" id="empSearch" placeholder="Search employees…"/>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Name</th><th>Email</th><th>Department</th><th>Role</th><th>Joined</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="hrTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="empForm">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">Add Employee</span>
+      <button class="modal-close" id="closeEmpModal">&times;</button>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Full Name</label><input id="eName" placeholder="Jane Doe"/></div>
+      <div class="form-group"><label>Email</label><input id="eEmail" type="email" placeholder="jane@company.com"/></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Department</label><input id="eDept" placeholder="Engineering"/></div>
+      <div class="form-group"><label>Role / Title</label><input id="eRole" placeholder="Senior Engineer"/></div>
+    </div>
+    <div class="form-group"><label>Date Joined</label><input type="date" id="eJoined"/></div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" id="closeEmpModal2">Cancel</button>
+      <button class="btn btn-primary" id="saveEmp">Save Employee</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/sidebar.js"></script>
+<script src="../js/hr.js"></script>
+</body>
+</html>

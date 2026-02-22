@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - StartupOps</title>
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="brand-logo">
+                <i class='bx bxs-business'></i>
+            </div>
+            <h2>Welcome Back</h2>
+            <p class="subtitle">Sign in to your dashboard</p>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <div class="input-with-icon">
+                        <i class='bx bx-envelope'></i>
+                        <input type="email" id="email" class="form-control" placeholder="name@company.com" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="input-with-icon">
+                        <i class='bx bx-lock-alt'></i>
+                        <input type="password" id="password" class="form-control" placeholder="••••••••" required />
+                    </div>
+                </div>
+
+                <button type="submit" id="loginBtn" class="btn btn-primary w-full">Sign In</button>
+            </form>
+
+            <p id="error" class="error-message"></p>
+
+            <div class="login-footer">
+                <p>New company? <a href="register.html">Register your startup →</a></p>
+            </div>
+        </div>
+    </div>
+    <script src="../js/login.js"></script>
+</body>
+
+</html>

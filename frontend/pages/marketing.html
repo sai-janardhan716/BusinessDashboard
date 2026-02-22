@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Marketing — StartupOps</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="app-layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="sidebar-brand" href="dashboard.html">
+      <div class="brand-icon"><i class='bx bxs-rocket'></i></div>
+      <span class="brand-name">StartupOps</span>
+    </a>
+    <nav class="sidebar-nav" id="sidebarMenu"></nav>
+    <div class="sidebar-user">
+      <div class="user-avatar"></div>
+      <div class="user-details">
+        <span class="user-name-display"></span>
+        <span class="user-role-display"></span>
+      </div>
+    </div>
+  </aside>
+
+  <div class="main-content">
+    <div class="page-header">
+      <div class="page-header-left">
+        <span class="page-eyebrow">Marketing</span>
+        <h1 class="page-title">Campaigns</h1>
+        <p class="page-subtitle">Track campaigns, channels and performance</p>
+      </div>
+      <div class="page-actions">
+        <button class="btn btn-primary" id="addCampBtn"><i class='bx bx-plus'></i> Add Campaign</button>
+      </div>
+    </div>
+
+    <div class="content-body">
+      <div class="kpi-grid">
+        <div class="kpi-card kpi-indigo">
+          <div class="kpi-body"><div class="kpi-label">Total Campaigns</div><div class="kpi-value" id="totalCamps">0</div></div>
+          <div class="kpi-icon indigo"><i class='bx bx-broadcast'></i></div>
+        </div>
+        <div class="kpi-card kpi-green">
+          <div class="kpi-body"><div class="kpi-label">Total Leads</div><div class="kpi-value" id="totalLeads">0</div></div>
+          <div class="kpi-icon green"><i class='bx bx-user-plus'></i></div>
+        </div>
+        <div class="kpi-card kpi-amber">
+          <div class="kpi-body"><div class="kpi-label">Conversions</div><div class="kpi-value" id="totalConversions">0</div></div>
+          <div class="kpi-icon amber"><i class='bx bx-check-circle'></i></div>
+        </div>
+        <div class="kpi-card kpi-red">
+          <div class="kpi-body"><div class="kpi-label">Total Spend</div><div class="kpi-value" id="totalSpend">₹0</div></div>
+          <div class="kpi-icon red"><i class='bx bx-wallet'></i></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="toolbar">
+          <div class="search-box">
+            <i class='bx bx-search'></i>
+            <input type="text" id="campSearch" placeholder="Search campaigns…"/>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Campaign</th><th>Channel</th><th>Spend</th><th>Leads</th><th>Conv.</th><th>Start Date</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="marketingTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="campForm">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">Add Campaign</span>
+      <button class="modal-close" id="closeCampModal">&times;</button>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Campaign Name</label><input id="mName" placeholder="Q1 Launch"/></div>
+      <div class="form-group">
+        <label>Channel</label>
+        <select id="mChannel"><option>Social Media</option><option>Email</option><option>SEO</option><option>PPC</option><option>Events</option></select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Spend (₹)</label><input id="mSpend" type="number" placeholder="0"/></div>
+      <div class="form-group"><label>Leads</label><input id="mLeads" type="number" placeholder="0"/></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Conversions</label><input id="mConv" type="number" placeholder="0"/></div>
+      <div class="form-group"><label>Start Date</label><input type="date" id="mDate"/></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" id="closeCampModal2">Cancel</button>
+      <button class="btn btn-primary" id="saveCamp">Save Campaign</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/sidebar.js"></script>
+<script src="../js/marketing.js"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard — StartupOps</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="app-layout">
+
+        <aside class="sidebar" id="sidebar">
+            <a class="sidebar-brand" href="dashboard.html">
+                <div class="brand-icon"><i class='bx bxs-rocket'></i></div>
+                <span class="brand-name">StartupOps</span>
+            </a>
+            <nav class="sidebar-nav" id="sidebarMenu"></nav>
+            <div class="sidebar-user">
+                <div class="user-avatar">R</div>
+                <div class="user-details">
+                    <span class="user-name-display">Loading…</span>
+                    <span class="user-role-display">—</span>
+                </div>
+            </div>
+        </aside>
+
+        <div class="main-content">
+            <div class="page-header">
+                <div class="page-header-left">
+                    <span class="page-eyebrow">Home</span>
+                    <h1 class="page-title">Dashboard</h1>
+                    <p class="page-subtitle">Welcome back! Here's your company overview.</p>
+                </div>
+            </div>
+
+            <div class="content-body">
+                <div class="kpi-grid">
+                    <div class="kpi-card kpi-indigo">
+                        <div class="kpi-body">
+                            <div class="kpi-label">Total Revenue</div>
+                            <div class="kpi-value">₹0</div>
+                            <div class="kpi-trend up"><i class='bx bx-trending-up'></i> —</div>
+                        </div>
+                        <div class="kpi-icon indigo"><i class='bx bx-rupee'></i></div>
+                    </div>
+                    <div class="kpi-card kpi-green">
+                        <div class="kpi-body">
+                            <div class="kpi-label">Employees</div>
+                            <div class="kpi-value">0</div>
+                            <div class="kpi-trend up"><i class='bx bx-trending-up'></i> —</div>
+                        </div>
+                        <div class="kpi-icon green"><i class='bx bx-group'></i></div>
+                    </div>
+                    <div class="kpi-card kpi-amber">
+                        <div class="kpi-body">
+                            <div class="kpi-label">Open Deals</div>
+                            <div class="kpi-value">0</div>
+                            <div class="kpi-trend up"><i class='bx bx-trending-up'></i> —</div>
+                        </div>
+                        <div class="kpi-icon amber"><i class='bx bx-briefcase'></i></div>
+                    </div>
+                    <div class="kpi-card kpi-purple">
+                        <div class="kpi-body">
+                            <div class="kpi-label">Compliance Docs</div>
+                            <div class="kpi-value">0</div>
+                            <div class="kpi-trend up"><i class='bx bx-trending-up'></i> —</div>
+                        </div>
+                        <div class="kpi-icon purple"><i class='bx bx-shield-check'></i></div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-head">
+                        <div>
+                            <div class="panel-title">Quick Navigation</div>
+                            <div class="panel-subtitle">Navigate using the sidebar or click a module below</div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;">
+                            <a href="finance.html" class="btn btn-ghost w-full" style="justify-content:flex-start;"><i
+                                    class='bx bx-line-chart'></i> Finance</a>
+                            <a href="hr.html" class="btn btn-ghost w-full" style="justify-content:flex-start;"><i
+                                    class='bx bx-group'></i> HR & Employees</a>
+                            <a href="sales.html" class="btn btn-ghost w-full" style="justify-content:flex-start;"><i
+                                    class='bx bx-trending-up'></i> Sales CRM</a>
+                            <a href="marketing.html" class="btn btn-ghost w-full" style="justify-content:flex-start;"><i
+                                    class='bx bx-broadcast'></i> Marketing</a>
+                            <a href="compliance.html" class="btn btn-ghost w-full"
+                                style="justify-content:flex-start;"><i class='bx bx-shield'></i> Compliance</a>
+                            <a href="operations.html" class="btn btn-ghost w-full"
+                                style="justify-content:flex-start;"><i class='bx bx-cog'></i> Operations</a>
+                            <a href="product.html" class="btn btn-ghost w-full" style="justify-content:flex-start;"><i
+                                    class='bx bx-chip'></i> Product</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/sidebar.js"></script>
+</body>
+
+</html>
