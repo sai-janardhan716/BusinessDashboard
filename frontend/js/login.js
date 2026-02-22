@@ -29,17 +29,49 @@ form.addEventListener("submit", async (e) => {
       return;
     }
 
-    // ── Officer must reset password first ──────────────────────────────────
     if (data.requiresReset) {
       sessionStorage.setItem("reset_email", email);
       window.location.href = "reset-password.html";
       return;
     }
-
-    // ── Normal login: store token and redirect ─────────────────────────────
     localStorage.setItem("token", data.token);
     localStorage.setItem("user", JSON.stringify(data.user));
-    window.location.href = "dashboard.html";
+
+    const role = data.user.role;
+
+    let redirectPage = "founder.html";
+
+    switch (role) {
+      case "Founder":
+        redirectPage = "founder.html";
+        break;
+
+      case "Finance":
+        redirectPage = "finance.html";
+        break;
+
+      case "HR":
+        redirectPage = "hr.html";
+        break;
+
+      case "Marketing":
+        redirectPage = "marketing.html";
+        break;
+
+      case "Sales":
+        redirectPage = "sales.html";
+        break;
+
+      case "Tech":
+        redirectPage = "product.html";
+        break;
+
+      case "Compliance":
+        redirectPage = "compliance.html";
+        break;
+    }
+
+    window.location.href = redirectPage;
 
   } catch (err) {
     console.error(err);

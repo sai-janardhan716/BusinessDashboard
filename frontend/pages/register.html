@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,29 +8,23 @@
   <link rel="stylesheet" href="../css/register.css" />
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 </head>
-
 <body>
   <div class="register-container">
-
     <div class="brand-header">
       <i class="bx bxs-business"></i>
       <span>Business Dashboard</span>
     </div>
-
     <div class="register-card">
       <h2>Register Your Company</h2>
       <p class="subtitle">Set up your company and invite your executive team in one step.</p>
-
       <form id="registerForm" novalidate>
-
-        <!-- ─── Company Info ─── -->
         <p class="section-title">Company Information</p>
         <div class="form-row">
           <div class="form-group">
             <label for="companyName">Company Name</label>
             <div class="input-with-icon">
               <i class="bx bx-buildings"></i>
-              <input type="text" id="companyName" placeholder="Acme Corp" required />
+              <input type="text" id="companyName" placeholder="Your Company name" required />
             </div>
           </div>
           <div class="form-group">
@@ -42,15 +35,13 @@
             </div>
           </div>
         </div>
-
-        <!-- ─── Founder Info ─── -->
         <p class="section-title">Founder Details</p>
         <div class="form-row">
           <div class="form-group">
             <label for="founderName">Your Full Name</label>
             <div class="input-with-icon">
               <i class="bx bx-user"></i>
-              <input type="text" id="founderName" placeholder="Jane Doe" required />
+              <input type="text" id="founderName" placeholder="Founder" required />
             </div>
           </div>
           <div class="form-group">
@@ -68,22 +59,17 @@
             <input type="password" id="password" placeholder="Min. 8 characters" required />
           </div>
         </div>
-
-        <!-- ─── Officers Checklist ─── -->
         <p class="section-title">Executive Officers (optional)</p>
         <p style="color:#64748b;font-size:.82rem;margin-bottom:14px;">
           Check each role to invite. An account will be auto-created and email credentials sent.
         </p>
-
         <div class="officer-list">
-
-          <!-- CTO -->
           <div class="officer-item" id="wrap-CTO">
             <label class="officer-checkbox-row">
               <input type="checkbox" class="officer-cb" data-role="CTO" id="cb-CTO" />
               <div class="officer-info">
-                <span class="officer-title">CTO — Chief Technology Officer</span>
-                <span class="officer-role-badge">Tech · role_id 6</span>
+                <span class="officer-title">CTO - Chief Technology Officer</span>
+                <span class="officer-role-badge">Tech - role_id 6</span>
               </div>
             </label>
             <div class="officer-fields" id="fields-CTO">
@@ -91,14 +77,12 @@
               <input type="email" id="email-CTO" placeholder="cto@company.com" />
             </div>
           </div>
-
-          <!-- CFO -->
           <div class="officer-item" id="wrap-CFO">
             <label class="officer-checkbox-row">
               <input type="checkbox" class="officer-cb" data-role="CFO" id="cb-CFO" />
               <div class="officer-info">
-                <span class="officer-title">CFO — Chief Financial Officer</span>
-                <span class="officer-role-badge">Finance · role_id 2</span>
+                <span class="officer-title">CFO - Chief Financial Officer</span>
+                <span class="officer-role-badge">Finance - role_id 2</span>
               </div>
             </label>
             <div class="officer-fields" id="fields-CFO">
@@ -106,14 +90,12 @@
               <input type="email" id="email-CFO" placeholder="cfo@company.com" />
             </div>
           </div>
-
-          <!-- CMO -->
           <div class="officer-item" id="wrap-CMO">
             <label class="officer-checkbox-row">
               <input type="checkbox" class="officer-cb" data-role="CMO" id="cb-CMO" />
               <div class="officer-info">
-                <span class="officer-title">CMO — Chief Marketing Officer</span>
-                <span class="officer-role-badge">Marketing · role_id 4</span>
+                <span class="officer-title">CMO - Chief Marketing Officer</span>
+                <span class="officer-role-badge">Marketing - role_id 4</span>
               </div>
             </label>
             <div class="officer-fields" id="fields-CMO">
@@ -121,14 +103,12 @@
               <input type="email" id="email-CMO" placeholder="cmo@company.com" />
             </div>
           </div>
-
-          <!-- CCO -->
           <div class="officer-item" id="wrap-CCO">
             <label class="officer-checkbox-row">
               <input type="checkbox" class="officer-cb" data-role="CCO" id="cb-CCO" />
               <div class="officer-info">
-                <span class="officer-title">CCO — Chief Compliance Officer</span>
-                <span class="officer-role-badge">Compliance · role_id 7</span>
+                <span class="officer-title">CCO - Chief Compliance Officer</span>
+                <span class="officer-role-badge">Compliance - role_id 7</span>
               </div>
             </label>
             <div class="officer-fields" id="fields-CCO">
@@ -136,14 +116,12 @@
               <input type="email" id="email-CCO" placeholder="cco@company.com" />
             </div>
           </div>
-
-          <!-- Head of Sales -->
           <div class="officer-item" id="wrap-Head of Sales">
             <label class="officer-checkbox-row">
               <input type="checkbox" class="officer-cb" data-role="Head of Sales" id="cb-HoS" />
               <div class="officer-info">
                 <span class="officer-title">Head of Sales</span>
-                <span class="officer-role-badge">Sales · role_id 5</span>
+                <span class="officer-role-badge">Sales - role_id 5</span>
               </div>
             </label>
             <div class="officer-fields" id="fields-Head of Sales">
@@ -151,22 +129,16 @@
               <input type="email" id="email-Head of Sales" placeholder="sales@company.com" />
             </div>
           </div>
-
-        </div><!-- /officer-list -->
-
+        </div>
         <button type="submit" class="btn-register" id="submitBtn">
-          <i class="bx bx-rocket"></i> Launch StartupOps
+          <i class="bx bx-rocket"></i> Launch your Dashboard
         </button>
-
         <p class="message" id="message"></p>
-
       </form>
-
       <div class="register-footer">
-        <p>Already have an account? <a href="login.html">Sign in →</a></p>
+        <p>Already have an account? <a href="login.html">Sign in -></a></p>
       </div>
-
-    </div><!-- /register-card -->
+    </div>
   </div>
 
   <script src="../js/register.js"></script>
