@@ -51,7 +51,9 @@ const navMap = {
   "HR":         [{ name: "HR", link: "hr.html" }],
   "Marketing":  [{ name: "Marketing", link: "marketing.html" }],
   "Sales":      [{ name: "Sales", link: "sales.html" }],
-  "Tech":       [{ name: "Product", link: "product.html" }],
+  "Tech":       [{ name: "Product", link: "product.html" },
+                { name: "HR", link: "hr.html" }
+  ],
   "Compliance": [{ name: "Compliance", link: "compliance.html" }]
 };
 

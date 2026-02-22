@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>HR — StartupOps</title>
+  <title>HR - Dashboard</title>
   <link rel="stylesheet" href="../css/style.css"/>
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
 </head>
@@ -12,7 +12,7 @@
 
   <aside class="sidebar" id="sidebar">
     <a class="sidebar-brand" href="dashboard.html">
-      <div class="brand-icon"><i class='bx bxs-rocket'></i></div>
+      <div class="brand-icon"><i class='bx bxs-buildings'></i></div>
       <span class="brand-name"></span>
     </a>
     <nav class="sidebar-nav" id="sidebarMenu"></nav>
@@ -52,7 +52,23 @@
             </thead>
             <tbody id="hrTable"></tbody>
           </table>
-        </div>
+          <div class="pagination-bar">
+            <div class="pagination-info"><span id="pageInfo"></span></div>
+            <div class="pagination-controls">
+              <button class="btn btn-sm btn-ghost" id="prevPage" onclick="changePage(-1)"><i class="bx bx-chevron-left"></i> Prev</button>
+              <span id="pageNumbers" class="page-numbers"></span>
+              <button class="btn btn-sm btn-ghost" id="nextPage" onclick="changePage(1)">Next <i class="bx bx-chevron-right"></i></button>
+            </div>
+            <div class="pagination-size">
+              <label>Rows:</label>
+              <select id="pageSizeSelect" onchange="changePageSize(this.value)">
+                <option value="5" selected>5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+              </select>
+            </div>
+          </div>
       </div>
     </div>
   </div>

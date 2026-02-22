@@ -85,21 +85,47 @@ async function deleteProd(id) {
 }
 
 
+let currentProductPage = 1;
+let pageSize = 5;
+let filteredData = [];
+
 async function loadProduct() {
   const res = await fetch("http://localhost:5000/api/product");
   const data = await res.json();
-
   prodData = data;
-  renderTable(data);
+  filteredData = data;
+  currentProductPage = 1;
+  renderTable();
+  updateProductKPIs(data);
 }
 
+function updateProductKPIs(data) {
+  let features = 0, done = 0, inProgress = 0, bugs = 0;
 
-function renderTable(data) {
+  data.forEach(p => {
+    features++;
+    if (p.type === "Bug") bugs++;
+    if (p.status === "Done") done++;
+    if (p.status === "In Progress") inProgress++;
+  });
+
+  document.getElementById("totalFeatures").textContent = features;
+  document.getElementById("doneProd").textContent = done;
+  document.getElementById("inProgressProd").textContent = inProgress;
+  document.getElementById("bugsProd").textContent = bugs;
+}
+
+function renderTable() {
   table.innerHTML = "";
 
-  data.forEach((p) => {
-    const tr = document.createElement("tr");
+  const totalPages = Math.max(1, Math.ceil(filteredData.length / pageSize));
+  if (currentProductPage > totalPages) currentProductPage = totalPages;
 
+  const start = (currentProductPage - 1) * pageSize;
+  const pageData = filteredData.slice(start, start + pageSize);
+
+  pageData.forEach((p) => {
+    const tr = document.createElement("tr");
     tr.innerHTML = `
       <td class="td-name">${p.feature_name}</td>
       <td><span class="badge ${p.type === 'Bug' ? 'badge-red' : 'badge-indigo'}">${p.type}</span></td>
@@ -111,11 +137,37 @@ function renderTable(data) {
         <button onclick="deleteProd(${p.id})" class="btn btn-sm btn-danger">Delete</button>
       </td>
     `;
-
     table.appendChild(tr);
   });
+
+  const end = Math.min(start + pageSize, filteredData.length);
+  document.getElementById("pageInfo").textContent =
+    filteredData.length === 0 ? "No entries" : `${start + 1}–${end} of ${filteredData.length}`;
+
+  document.getElementById("prevPage").disabled = currentProductPage <= 1;
+  document.getElementById("nextPage").disabled = currentProductPage >= totalPages;
+
+  const pnEl = document.getElementById("pageNumbers");
+  pnEl.innerHTML = "";
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement("button");
+    btn.className = "page-btn" + (i === currentProductPage ? " active" : "");
+    btn.textContent = i;
+    btn.onclick = () => { currentProductPage = i; renderTable(); };
+    pnEl.appendChild(btn);
+  }
 }
 
+function changePage(dir) {
+  currentProductPage += dir;
+  renderTable();
+}
+
+function changePageSize(val) {
+  pageSize = parseInt(val);
+  currentProductPage = 1;
+  renderTable();
+}
 
 prodSearch.oninput = applyFilters;
 typeFilter.onchange = applyFilters;
@@ -128,7 +180,7 @@ function applyFilters() {
   const stat = statusFilter.value;
   const prio = priorityFilter.value;
 
-  const filtered = prodData.filter(
+  filteredData = prodData.filter(
     (p) =>
       p.feature_name.toLowerCase().includes(q) &&
       (type === "" || p.type === type) &&
@@ -136,8 +188,8 @@ function applyFilters() {
       (prio === "" || p.priority === prio),
   );
 
-  renderTable(filtered);
+  currentProductPage = 1;
+  renderTable();
 }
-
 
 loadProduct();
