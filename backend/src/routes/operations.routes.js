@@ -2,7 +2,7 @@ const router = require("express").Router();
 const db = require("../config/db");
 
 
-// CREATE
+
 router.post("/", async (req, res) => {
   const { item_name, category, status, owner } = req.body;
 
@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
 });
 
 
-// GET
+
 router.get("/", async (req, res) => {
   const [rows] = await db.execute(
     "SELECT * FROM operations ORDER BY created_at DESC"
@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
 });
 
 
-// UPDATE
+
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
   const { item_name, category, status, owner } = req.body;
@@ -38,7 +38,7 @@ router.put("/:id", async (req, res) => {
 });
 
 
-// DELETE
+
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
 

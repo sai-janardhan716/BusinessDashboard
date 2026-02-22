@@ -22,14 +22,14 @@ document.getElementById("closeCampModal").onclick = closeCampModal;
 document.getElementById("closeCampModal2").onclick = closeCampModal;
 form.addEventListener("click", e => { if (e.target === form) closeCampModal(); });
 
-// OPEN
+
 addCampBtn.onclick = () => {
   editingId = null;
   openCampModal();
 };
 
 
-// SAVE
+
 saveCamp.onclick = async () => {
   const campaign_name = mName.value;
   const channel = mChannel.value;
@@ -64,7 +64,7 @@ saveCamp.onclick = async () => {
 };
 
 
-// EDIT
+
 function editCamp(id) {
   const c = campData.find(x => x.id === id);
 
@@ -80,7 +80,7 @@ function editCamp(id) {
 }
 
 
-// DELETE
+
 async function deleteCamp(id) {
   if (!confirm("Delete campaign?")) return;
 
@@ -92,7 +92,7 @@ async function deleteCamp(id) {
 }
 
 
-// LOAD
+
 async function loadCampaigns() {
   const res = await fetch("http://localhost:5000/api/marketing");
   const data = await res.json();
@@ -102,7 +102,7 @@ async function loadCampaigns() {
 }
 
 
-// RENDER
+
 function renderTable(data) {
   table.innerHTML = "";
 
@@ -127,7 +127,7 @@ function renderTable(data) {
 }
 
 
-// SEARCH
+
 campSearch.oninput = () => {
   const q = campSearch.value.toLowerCase();
 
@@ -140,5 +140,5 @@ campSearch.oninput = () => {
 };
 
 
-// INIT
+
 loadCampaigns();

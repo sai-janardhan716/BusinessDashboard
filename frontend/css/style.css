@@ -1,20 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  /* ── Brand Colors ── */
+
   --primary: #6366f1;
   --primary-hover: #5254d4;
   --primary-glow: rgba(99, 102, 241, 0.18);
   --primary-light: rgba(99, 102, 241, 0.10);
 
-  /* ── Accent ── */
+
   --accent-green: #10b981;
   --accent-amber: #f59e0b;
   --accent-red: #ef4444;
   --accent-cyan: #06b6d4;
   --accent-purple: #8b5cf6;
 
-  /* ── Surfaces ── */
+
   --bg: #070b14;
   --surface-1: #0d1322;
   --surface-2: #111827;
@@ -22,15 +22,15 @@
   --border: rgba(255, 255, 255, 0.07);
   --border-hover: rgba(99, 102, 241, 0.35);
 
-  /* ── Text ── */
+
   --text-1: #f1f5f9;
   --text-2: #94a3b8;
   --text-3: #475569;
 
-  /* ── Sidebar ── */
+
   --sidebar-w: 255px;
 
-  /* ── Misc ── */
+
   --radius: 12px;
   --radius-sm: 8px;
   --shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
@@ -63,7 +63,7 @@ body {
   min-height: 100vh;
 }
 
-/* ── Sidebar ─────────────────────────────────── */
+
 .sidebar {
   width: var(--sidebar-w);
   background: var(--surface-1);
@@ -76,7 +76,7 @@ body {
   transition: transform 0.3s ease;
 }
 
-/* Brand */
+
 .sidebar-brand {
   display: flex;
   align-items: center;
@@ -109,7 +109,7 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-/* Nav */
+
 .sidebar-nav {
   flex: 1;
   padding: 12px 10px;
@@ -182,7 +182,7 @@ body {
   border-radius: 0 4px 4px 0;
 }
 
-/* User Profile */
+
 .sidebar-user {
   margin: 10px;
   padding: 12px 14px;
@@ -228,7 +228,7 @@ body {
   color: var(--text-3);
 }
 
-/* ── Main Content ────────────────────────────── */
+
 .main-content {
   flex: 1;
   margin-left: var(--sidebar-w);
@@ -237,7 +237,7 @@ body {
   flex-direction: column;
 }
 
-/* Page Header */
+
 .page-header {
   display: flex;
   align-items: center;
@@ -281,15 +281,13 @@ body {
   flex-wrap: wrap;
 }
 
-/* Content wrapper */
+
 .content-body {
   padding: 20px 28px 40px;
   flex: 1;
 }
 
-/* ══════════════════════════════════════════════════
-   KPI / STAT CARDS
-══════════════════════════════════════════════════ */
+
 .kpi-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -374,7 +372,7 @@ body {
   flex-shrink: 0;
 }
 
-/* Colour variants */
+
 .kpi-indigo {
   --kpi-color: #6366f1;
 }
@@ -429,7 +427,7 @@ body {
   color: #ef4444;
 }
 
-/* ── Section Label (founder overview category headers) ── */
+
 .section-label {
   display: flex;
   align-items: center;
@@ -453,9 +451,7 @@ body {
   color: var(--primary);
 }
 
-/* ══════════════════════════════════════════════════
-   PANEL (Card wrapper)
-══════════════════════════════════════════════════ */
+
 .panel {
   background: var(--surface-2);
   border: 1px solid var(--border);
@@ -496,9 +492,7 @@ body {
   gap: 20px;
 }
 
-/* ══════════════════════════════════════════════════
-   TABLE
-══════════════════════════════════════════════════ */
+
 .table-wrap {
   overflow-x: auto;
 }
@@ -544,9 +538,7 @@ tbody tr:hover td {
   font-weight: 500;
 }
 
-/* ══════════════════════════════════════════════════
-   SEARCH / FILTER BAR
-══════════════════════════════════════════════════ */
+
 .toolbar {
   display: flex;
   align-items: center;
@@ -577,9 +569,7 @@ tbody tr:hover td {
   padding: 8px 12px 8px 34px;
 }
 
-/* ══════════════════════════════════════════════════
-   FORM ELEMENTS
-══════════════════════════════════════════════════ */
+
 input,
 select,
 textarea {
@@ -629,9 +619,7 @@ label {
   gap: 14px;
 }
 
-/* ══════════════════════════════════════════════════
-   BUTTONS
-══════════════════════════════════════════════════ */
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -706,9 +694,7 @@ label {
   border-radius: 8px;
 }
 
-/* ══════════════════════════════════════════════════
-   STATUS BADGES
-══════════════════════════════════════════════════ */
+
 .badge {
   display: inline-flex;
   align-items: center;
@@ -773,9 +759,7 @@ label {
   background: #64748b;
 }
 
-/* ══════════════════════════════════════════════════
-   MODAL / POPUP
-══════════════════════════════════════════════════ */
+
 .modal-overlay {
   display: none;
   position: fixed;
@@ -852,7 +836,7 @@ label {
   border-top: 1px solid var(--border);
 }
 
-/* Legacy popup alias (backward compat) */
+
 .popup {
   display: none;
   position: fixed;
@@ -890,9 +874,7 @@ label {
   margin-bottom: 6px;
 }
 
-/* ══════════════════════════════════════════════════
-   TOAST
-══════════════════════════════════════════════════ */
+
 .toast-container {
   position: fixed;
   bottom: 24px;
@@ -942,9 +924,7 @@ label {
   border-color: rgba(99, 102, 241, 0.25);
 }
 
-/* ══════════════════════════════════════════════════
-   EMPTY STATE
-══════════════════════════════════════════════════ */
+
 .empty-state {
   display: flex;
   flex-direction: column;
@@ -965,9 +945,7 @@ label {
   font-size: 0.9rem;
 }
 
-/* ══════════════════════════════════════════════════
-   UTILS
-══════════════════════════════════════════════════ */
+
 .flex {
   display: flex;
 }
@@ -1021,7 +999,7 @@ label {
   display: none !important;
 }
 
-/* Amount / value colors */
+
 .text-green {
   color: var(--accent-green);
 }
@@ -1038,9 +1016,7 @@ label {
   color: var(--primary);
 }
 
-/* ══════════════════════════════════════════════════
-   SCROLLBAR
-══════════════════════════════════════════════════ */
+
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -1059,9 +1035,7 @@ label {
   background: var(--border-hover);
 }
 
-/* ══════════════════════════════════════════════════
-   RESPONSIVE
-══════════════════════════════════════════════════ */
+
 @media (max-width: 900px) {
   .sidebar {
     transform: translateX(-100%);

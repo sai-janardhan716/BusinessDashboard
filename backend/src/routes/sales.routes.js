@@ -2,7 +2,7 @@ const router = require("express").Router();
 const db = require("../config/db");
 
 
-// CREATE DEAL
+
 router.post("/", async (req, res) => {
   const { client_name, deal_value, status, close_date } = req.body;
 
@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
 });
 
 
-// GET ALL DEALS
+
 router.get("/", async (req, res) => {
   const [rows] = await db.execute(
     "SELECT * FROM sales ORDER BY close_date DESC"
@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
 });
 
 
-// UPDATE DEAL
+
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
   const { client_name, deal_value, status, close_date } = req.body;
@@ -38,7 +38,7 @@ router.put("/:id", async (req, res) => {
 });
 
 
-// DELETE DEAL
+
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
 

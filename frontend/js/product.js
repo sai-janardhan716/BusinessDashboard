@@ -24,13 +24,13 @@ document.getElementById("closeProdModal").onclick = closeProdModal;
 document.getElementById("closeProdModal2").onclick = closeProdModal;
 form.addEventListener("click", e => { if (e.target === form) closeProdModal(); });
 
-// OPEN
+
 addProdBtn.onclick = () => {
   editingId = null;
   openProdModal();
 };
 
-// SAVE
+
 saveProd.onclick = async () => {
   const feature_name = pName.value;
   const type = pType.value;
@@ -59,7 +59,7 @@ saveProd.onclick = async () => {
   loadProduct();
 };
 
-// EDIT
+
 function editProd(id) {
   const p = prodData.find((x) => x.id === id);
 
@@ -73,7 +73,7 @@ function editProd(id) {
   openProdModal();
 }
 
-// DELETE
+
 async function deleteProd(id) {
   if (!confirm("Delete item?")) return;
 
@@ -84,7 +84,7 @@ async function deleteProd(id) {
   loadProduct();
 }
 
-// LOAD
+
 async function loadProduct() {
   const res = await fetch("http://localhost:5000/api/product");
   const data = await res.json();
@@ -93,7 +93,7 @@ async function loadProduct() {
   renderTable(data);
 }
 
-// RENDER
+
 function renderTable(data) {
   table.innerHTML = "";
 
@@ -116,7 +116,7 @@ function renderTable(data) {
   });
 }
 
-// FILTER + SEARCH
+
 prodSearch.oninput = applyFilters;
 typeFilter.onchange = applyFilters;
 statusFilter.onchange = applyFilters;
@@ -139,5 +139,5 @@ function applyFilters() {
   renderTable(filtered);
 }
 
-// INIT
+
 loadProduct();

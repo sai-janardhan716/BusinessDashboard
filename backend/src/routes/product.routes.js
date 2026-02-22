@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const db = require("../config/db");
 
-// CREATE
+
 router.post("/", async (req, res) => {
   const { feature_name, type, status, priority, owner } = req.body;
 
@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
   res.json({ message: "Product item added" });
 });
 
-// GET
+
 router.get("/", async (req, res) => {
   const [rows] = await db.execute(
     "SELECT * FROM product ORDER BY created_at DESC",
@@ -21,7 +21,7 @@ router.get("/", async (req, res) => {
   res.json(rows);
 });
 
-// UPDATE
+
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
   const { feature_name, type, status, priority, owner } = req.body;
@@ -34,7 +34,7 @@ router.put("/:id", async (req, res) => {
   res.json({ message: "Product updated" });
 });
 
-// DELETE
+
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
 

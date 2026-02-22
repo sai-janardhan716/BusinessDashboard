@@ -77,7 +77,7 @@ function computeFinance(finance) {
 
   drawFinanceChart(monthlyRev, monthlyExp);
 
-  // Populate recent transactions table
+
   const rf = document.getElementById("recentFinance");
   if (rf) {
     rf.innerHTML = "";
@@ -267,10 +267,10 @@ function computeOperations(data){
 
 let financeChart, empChart, salesChart, marketingChart, productChart, complianceChart, operationsChart;
 
-// Color palette for doughnut charts
+
 const CHART_COLORS = ["#6366f1","#10b981","#f59e0b","#ef4444","#06b6d4","#8b5cf6","#ec4899","#14b8a6"];
 
-// Custom plugin to draw percentage labels on doughnut slices
+
 const percentLabelPlugin = {
   id: "percentLabels",
   afterDraw(chart) {
@@ -286,17 +286,17 @@ const percentLabelPlugin = {
       const pct = ((val / total) * 100).toFixed(1) + "%";
       if (val === 0) return;
 
-      // Position at the midpoint of the arc
+
       const { x, y } = arc.tooltipPosition();
 
       ctx.save();
       ctx.font = "bold 12px Inter, sans-serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      // Shadow for readability
+
       ctx.fillStyle = "rgba(0,0,0,0.5)";
       ctx.fillText(pct, x + 1, y + 1);
-      // White text
+
       ctx.fillStyle = "#fff";
       ctx.fillText(pct, x, y);
       ctx.restore();
@@ -304,7 +304,7 @@ const percentLabelPlugin = {
   }
 };
 
-// Dark theme defaults for all charts
+
 const darkThemeOptions = {
   responsive: true,
   maintainAspectRatio: true,

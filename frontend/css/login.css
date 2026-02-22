@@ -1,6 +1,4 @@
-/* ════════════════════════════════════
-   LOGIN — StartupOps Dark Theme
-════════════════════════════════════ */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -17,7 +15,7 @@ body {
   overflow: hidden;
 }
 
-/* Ambient glow */
+
 body::before {
   content: '';
   position: fixed;
@@ -35,7 +33,7 @@ body::after {
   pointer-events: none;
 }
 
-/* Layout */
+
 .login-container {
   width: 100%;
   max-width: 420px;
@@ -51,7 +49,7 @@ body::after {
   box-shadow: 0 8px 48px rgba(0,0,0,0.5);
 }
 
-/* Brand logo icon */
+
 .brand-logo {
   width: 52px; height: 52px;
   background: linear-gradient(135deg, #6366f1, #8b5cf6);
@@ -78,7 +76,7 @@ body::after {
   margin-bottom: 28px;
 }
 
-/* Form */
+
 .form-group { margin-bottom: 16px; }
 
 .form-label {
@@ -89,7 +87,7 @@ body::after {
   margin-bottom: 6px;
 }
 
-/* Icon input wrapper */
+
 .input-with-icon {
   position: relative;
 }
@@ -104,7 +102,7 @@ body::after {
   pointer-events: none;
 }
 
-/* Inputs — scoped to login-card so they don't bleed */
+
 .login-card input,
 .form-control {
   width: 100%;
@@ -128,7 +126,7 @@ body::after {
   box-shadow: 0 0 0 3px rgba(99,102,241,0.18);
 }
 
-/* Buttons */
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -159,7 +157,7 @@ body::after {
 
 .w-full { width: 100%; }
 
-/* Error */
+
 .error-message {
   font-size: 0.82rem;
   color: #ef4444;
@@ -168,7 +166,7 @@ body::after {
   text-align: center;
 }
 
-/* Footer */
+
 .login-footer {
   padding-top: 20px;
   border-top: 1px solid rgba(255,255,255,0.06);

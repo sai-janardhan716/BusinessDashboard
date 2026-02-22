@@ -1,12 +1,12 @@
 const API = "http://localhost:5000/api/auth";
 
-// ─── Pre-fill email from session (set by login.js on pending_reset) ──────────
+
 const savedEmail = sessionStorage.getItem("reset_email") || "";
 const form = document.getElementById("resetForm");
 const msgEl = document.getElementById("message");
 const submitBtn = document.getElementById("submitBtn");
 
-// ─── Password eye toggles ─────────────────────────────────────────────────────
+
 function setupEyeToggle(inputId, toggleId) {
   const input = document.getElementById(inputId);
   const icon = document.getElementById(toggleId);
@@ -22,7 +22,7 @@ setupEyeToggle("currentPassword", "toggleCurrent");
 setupEyeToggle("newPassword", "toggleNew");
 setupEyeToggle("confirmPassword", "toggleConfirm");
 
-// ─── Password strength indicator ─────────────────────────────────────────────
+
 const strengthBar = document.getElementById("strengthBar");
 const strengthLabel = document.getElementById("strengthLabel");
 
@@ -52,7 +52,7 @@ function getStrengthScore(pwd) {
   return score;
 }
 
-// ─── Form submit ──────────────────────────────────────────────────────────────
+
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   clearMessage();
@@ -61,7 +61,7 @@ form.addEventListener("submit", async (e) => {
   const newPassword = document.getElementById("newPassword").value;
   const confirmPassword = document.getElementById("confirmPassword").value;
 
-  // Get email — from sessionStorage or prompt
+
   const email = savedEmail || prompt("Enter your account email:");
   if (!email) return showMessage("Email is required to reset your password.", "error");
 
@@ -93,7 +93,7 @@ form.addEventListener("submit", async (e) => {
       return showMessage(data.message || "Reset failed.", "error");
     }
 
-    // Store credentials and redirect to dashboard
+
     localStorage.setItem("token", data.token);
     localStorage.setItem("user", JSON.stringify(data.user));
     sessionStorage.removeItem("reset_email");
@@ -111,7 +111,7 @@ form.addEventListener("submit", async (e) => {
   }
 });
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
+
 function showMessage(text, type) {
   msgEl.textContent = text;
   msgEl.className = `message ${type}`;

@@ -4,19 +4,19 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 
-// ─── Utility: generate random temporary password ────────────────────────────
+
 function generateTempPassword(length = 10) {
   return crypto.randomBytes(length).toString("base64url").slice(0, length);
 }
 
-// ─── Valid officer roles ────────────────────────────────────────────────────
+
 const VALID_ROLES = ["Finance", "HR", "Marketing", "Sales", "Tech", "Compliance"];
 
-// ═════════════════════════════════════════════════════════════════════════════
-// POST /api/auth/founder-register
-// Body: { company_name, founded_date, founder_name, founder_email, password,
-//         officers: { "Finance": "email", "HR": "email", ... } }
-// ═════════════════════════════════════════════════════════════════════════════
+
+
+
+
+
 exports.founderRegister = async (req, res) => {
   const {
     company_name,
@@ -27,7 +27,7 @@ exports.founderRegister = async (req, res) => {
     officers = {},
   } = req.body;
 
-  // ── Validation ──────────────────────────────────────────────────────────
+
   if (!company_name || !founder_name || !founder_email || !password) {
     return res.status(400).json({
       success: false,
@@ -35,13 +35,13 @@ exports.founderRegister = async (req, res) => {
     });
   }
 
-  // Get a dedicated connection for transaction
+
   const connection = await db.getConnection();
 
   try {
     await connection.beginTransaction();
 
-    // 1. Check if founder email already exists
+
     const [existingUsers] = await connection.execute(
       "SELECT id FROM users WHERE email = ?",
       [founder_email]
@@ -55,17 +55,17 @@ exports.founderRegister = async (req, res) => {
       });
     }
 
-    // 2. Insert company
+
     const [companyResult] = await connection.execute(
       "INSERT INTO companies (name, founded_date) VALUES (?, ?)",
       [company_name, founded_date || null]
     );
     const company_id = companyResult.insertId;
 
-    // 3. Hash founder password
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // 4. Insert founder user
+
     const [founderResult] = await connection.execute(
       `INSERT INTO users (name, email, password, role, company_id, requires_reset)
        VALUES (?, ?, ?, 'Founder', ?, false)`,
@@ -73,12 +73,12 @@ exports.founderRegister = async (req, res) => {
     );
     const founder_id = founderResult.insertId;
 
-    // 5. Insert officer users (if provided)
+
     for (const [role, email] of Object.entries(officers)) {
-      // Skip null/empty emails and invalid roles
+
       if (!email || !VALID_ROLES.includes(role)) continue;
 
-      // Generate temporary password
+
       const tempPassword = generateTempPassword();
       const hashedTempPassword = await bcrypt.hash(tempPassword, 10);
 
@@ -89,7 +89,7 @@ exports.founderRegister = async (req, res) => {
       );
     }
 
-    // 6. Commit transaction
+
     await connection.commit();
     connection.release();
 
@@ -99,7 +99,7 @@ exports.founderRegister = async (req, res) => {
       founder_id,
     });
   } catch (err) {
-    // Rollback on any error
+
     await connection.rollback();
     connection.release();
     console.error("founderRegister error:", err);
@@ -110,11 +110,11 @@ exports.founderRegister = async (req, res) => {
   }
 };
 
-// ═════════════════════════════════════════════════════════════════════════════
-// POST /api/auth/login
-// Body: { email, password }
-// Response: { token, user } OR { requiresReset: true, email }
-// ═════════════════════════════════════════════════════════════════════════════
+
+
+
+
+
 exports.login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -143,7 +143,7 @@ exports.login = async (req, res) => {
       return res.status(401).json({ message: "Invalid email or password." });
     }
 
-    // Officer must reset password before accessing dashboard
+
     if (user.requires_reset) {
       return res.json({
         requiresReset: true,
@@ -152,7 +152,7 @@ exports.login = async (req, res) => {
       });
     }
 
-    // Issue JWT for active users
+
     const token = jwt.sign(
       { id: user.id, role: user.role, company_id: user.company_id },
       process.env.JWT_SECRET,
@@ -174,10 +174,10 @@ exports.login = async (req, res) => {
   }
 };
 
-// ═════════════════════════════════════════════════════════════════════════════
-// POST /api/auth/reset-password
-// Body: { email, currentPassword, newPassword }
-// ═════════════════════════════════════════════════════════════════════════════
+
+
+
+
 exports.resetPassword = async (req, res) => {
   const { email, currentPassword, newPassword } = req.body;
 
@@ -216,7 +216,7 @@ exports.resetPassword = async (req, res) => {
       [newHash, email]
     );
 
-    // Issue a JWT so the user is logged in immediately after reset
+
     const token = jwt.sign(
       { id: user.id, role: user.role, company_id: user.company_id },
       process.env.JWT_SECRET,
@@ -239,9 +239,9 @@ exports.resetPassword = async (req, res) => {
   }
 };
 
-// ═════════════════════════════════════════════════════════════════════════════
-// GET /api/auth/users  (protected)
-// ═════════════════════════════════════════════════════════════════════════════
+
+
+
 exports.getUsers = async (req, res) => {
   try {
     const [users] = await db.execute(

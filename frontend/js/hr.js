@@ -1,4 +1,4 @@
-// ELEMENTS
+
 const table = document.getElementById("hrTable");
 const form = document.getElementById("empForm");
 const empSearch = document.getElementById("empSearch");
@@ -15,7 +15,7 @@ const eJoined = document.getElementById("eJoined");
 let empData = [];
 let editingEmpId = null;
 
-// OPEN FORM
+
 function openEmpModal() { form.classList.add("open"); }
 function closeEmpModal() { form.classList.remove("open"); }
 
@@ -24,7 +24,7 @@ document.getElementById("closeEmpModal").onclick = closeEmpModal;
 document.getElementById("closeEmpModal2").onclick = closeEmpModal;
 form.addEventListener("click", e => { if (e.target === form) closeEmpModal(); });
 
-// SAVE
+
 saveEmp.onclick = async () => {
   const name = eName.value;
   const email = eEmail.value;
@@ -53,7 +53,7 @@ saveEmp.onclick = async () => {
   loadEmployees();
 };
 
-// EDIT
+
 function editEmp(id) {
   const e = empData.find((x) => x.id === id);
 
@@ -66,7 +66,7 @@ function editEmp(id) {
   openEmpModal();
 }
 
-// DELETE
+
 async function deleteEmp(id) {
   if (!confirm("Delete employee?")) return;
 
@@ -77,7 +77,7 @@ async function deleteEmp(id) {
   loadEmployees();
 }
 
-// LOAD
+
 async function loadEmployees() {
   const res = await fetch("http://localhost:5000/api/employees");
   const data = await res.json();
@@ -104,7 +104,7 @@ async function loadEmployees() {
   });
 }
 
-// SEARCH
+
 empSearch.oninput = () => {
   const q = empSearch.value.toLowerCase();
 
@@ -113,5 +113,5 @@ empSearch.oninput = () => {
   });
 };
 
-// INIT
+
 loadEmployees();

@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const db = require("../config/db");
 
-// add employee
+
 router.post("/", async (req, res) => {
   const { name, email, department, role, joined } = req.body;
 
@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
   res.json({ message: "Employee added" });
 });
 
-// list
+
 router.get("/", async (req, res) => {
   const [rows] = await db.execute(
     "SELECT * FROM employees ORDER BY joined DESC",
@@ -31,7 +31,7 @@ router.put("/:id", async (req, res) => {
   res.json({ message: "Employee updated" });
 });
 
-// DELETE EMPLOYEE
+
 router.delete("/:id", async (req, res) => {
   await db.execute("DELETE FROM employees WHERE id=?", [req.params.id]);
 

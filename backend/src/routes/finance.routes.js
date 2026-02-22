@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const db = require("../config/db");
 
-// add transaction
+
 router.post("/", async (req, res) => {
   const { type, amount, description, date } = req.body;
 
@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
   res.json({ message: "Saved" });
 });
 
-// get all
+
 router.get("/", async (req, res) => {
   const [rows] = await db.execute(
     "SELECT * FROM finance_transactions ORDER BY date DESC",
@@ -21,7 +21,7 @@ router.get("/", async (req, res) => {
   res.json(rows);
 });
 
-// UPDATE
+
 router.put("/:id", async (req, res) => {
   const { type, amount, date, description } = req.body;
 
@@ -33,7 +33,7 @@ router.put("/:id", async (req, res) => {
   res.json({ message: "Updated" });
 });
 
-// DELETE
+
 router.delete("/:id", async (req, res) => {
   await db.execute("DELETE FROM finance_transactions WHERE id=?", [req.params.id]);
 

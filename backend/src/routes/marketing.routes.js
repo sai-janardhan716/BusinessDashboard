@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const db = require("../config/db");
 
-// CREATE
+
 router.post("/", async (req, res) => {
   const { campaign_name, channel, spend, leads, conversions, start_date } =
     req.body;
@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
   res.json({ message: "Campaign added" });
 });
 
-// GET
+
 router.get("/", async (req, res) => {
   const [rows] = await db.execute(
     "SELECT * FROM marketing ORDER BY start_date DESC",
@@ -22,7 +22,7 @@ router.get("/", async (req, res) => {
   res.json(rows);
 });
 
-// UPDATE
+
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
   const { campaign_name, channel, spend, leads, conversions, start_date } =
@@ -36,7 +36,7 @@ router.put("/:id", async (req, res) => {
   res.json({ message: "Campaign updated" });
 });
 
-// DELETE
+
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
 

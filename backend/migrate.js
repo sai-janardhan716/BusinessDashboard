@@ -8,14 +8,14 @@ const mysql = require("mysql2/promise");
     database: "startup_dashboard",
   });
 
-  // Get current column names
+
   const [cols] = await pool.execute(
     "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA='startup_dashboard' AND TABLE_NAME='users'"
   );
   const colNames = cols.map((c) => c.COLUMN_NAME);
   console.log("Before migration:", colNames.join(", "));
 
-  // 1. Rename password_hash → password
+
   if (colNames.includes("password_hash") && !colNames.includes("password")) {
     await pool.execute("ALTER TABLE users CHANGE COLUMN password_hash password VARCHAR(255) NOT NULL");
     console.log("✓ Renamed password_hash → password");
@@ -23,11 +23,11 @@ const mysql = require("mysql2/promise");
     console.log("• password column already exists");
   }
 
-  // 2. Add 'role' string column if missing
+
   if (!colNames.includes("role")) {
     await pool.execute("ALTER TABLE users ADD COLUMN role VARCHAR(50) DEFAULT 'Founder'");
     console.log("✓ Added role column");
-    // Populate from roles table
+
     if (colNames.includes("role_id")) {
       try {
         await pool.execute("UPDATE users u JOIN roles r ON r.id = u.role_id SET u.role = r.name");
@@ -40,11 +40,11 @@ const mysql = require("mysql2/promise");
     console.log("• role column already exists");
   }
 
-  // 3. Add requires_reset column if missing
+
   if (!colNames.includes("requires_reset")) {
     await pool.execute("ALTER TABLE users ADD COLUMN requires_reset BOOLEAN DEFAULT false");
     console.log("✓ Added requires_reset column");
-    // Migrate from status
+
     if (colNames.includes("status")) {
       await pool.execute("UPDATE users SET requires_reset = 1 WHERE status = 'pending_reset'");
       await pool.execute("UPDATE users SET requires_reset = 0 WHERE status != 'pending_reset' OR status IS NULL");
@@ -54,7 +54,7 @@ const mysql = require("mysql2/promise");
     console.log("• requires_reset column already exists");
   }
 
-  // 4. Ensure company_id exists
+
   if (!colNames.includes("company_id")) {
     await pool.execute("ALTER TABLE users ADD COLUMN company_id INT DEFAULT NULL");
     console.log("✓ Added company_id");
@@ -68,7 +68,7 @@ const mysql = require("mysql2/promise");
     console.log("• company_id column already exists");
   }
 
-  // 5. Ensure companies table exists
+
   const [tables] = await pool.execute(
     "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='startup_dashboard' AND TABLE_NAME='companies'"
   );
@@ -81,7 +81,7 @@ const mysql = require("mysql2/promise");
     console.log("• companies table already exists");
   }
 
-  // Verify final schema
+
   const [finalCols] = await pool.execute(
     "SELECT COLUMN_NAME, COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA='startup_dashboard' AND TABLE_NAME='users' ORDER BY ORDINAL_POSITION"
   );

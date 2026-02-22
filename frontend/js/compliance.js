@@ -22,14 +22,14 @@ document.getElementById("closeCompModal").onclick = closeCompModal;
 document.getElementById("closeCompModal2").onclick = closeCompModal;
 form.addEventListener("click", e => { if (e.target === form) closeCompModal(); });
 
-// OPEN FORM
+
 addCompBtn.onclick = () => {
   editingId = null;
   openCompModal();
 };
 
 
-// SAVE
+
 saveComp.onclick = async () => {
   const doc_name = cName.value;
   const type = cType.value;
@@ -58,7 +58,7 @@ saveComp.onclick = async () => {
 };
 
 
-// EDIT
+
 function editComp(id) {
   const c = compData.find(x => x.id === id);
 
@@ -72,7 +72,7 @@ function editComp(id) {
 }
 
 
-// DELETE
+
 async function deleteComp(id) {
   if (!confirm("Delete document?")) return;
 
@@ -84,7 +84,7 @@ async function deleteComp(id) {
 }
 
 
-// LOAD
+
 async function loadCompliance() {
   const res = await fetch("http://localhost:5000/api/compliance");
   const data = await res.json();
@@ -94,7 +94,7 @@ async function loadCompliance() {
 }
 
 
-// RENDER
+
 function renderTable(data) {
   table.innerHTML = "";
 
@@ -117,12 +117,12 @@ function renderTable(data) {
 }
 
 
-// SEARCH
+
 compSearch.oninput = () => {
   applyFilters();
 };
 
-// FILTER
+
 statusFilter.onchange = () => {
   applyFilters();
 };
@@ -140,5 +140,5 @@ function applyFilters() {
 }
 
 
-// INIT
+
 loadCompliance();

@@ -5,7 +5,7 @@ let financeData = [];
 let editingFinanceId = null;
 let currentType = "Revenue";
 
-// OPEN FORM
+
 function openFinanceModal() { form.classList.add("open"); }
 function closeFinanceModal() { form.classList.remove("open"); }
 
@@ -25,7 +25,7 @@ document.getElementById("closeFinanceModal").onclick = closeFinanceModal;
 document.getElementById("closeFinanceModal2").onclick = closeFinanceModal;
 form.addEventListener("click", e => { if (e.target === form) closeFinanceModal(); });
 
-// SAVE
+
 saveFinance.onclick = async () => {
   const date = fDate.value;
   const amount = fAmount.value;
@@ -62,7 +62,7 @@ saveFinance.onclick = async () => {
   loadFinance();
 };
 
-// EDIT
+
 function editFinance(id) {
   const f = financeData.find((x) => x.id === id);
 
@@ -77,7 +77,7 @@ function editFinance(id) {
   openFinanceModal();
 }
 
-// DELETE
+
 async function deleteFinance(id) {
   if (!confirm("Delete entry?")) return;
 
@@ -88,7 +88,7 @@ async function deleteFinance(id) {
   loadFinance();
 }
 
-// LOAD
+
 async function loadFinance() {
   const res = await fetch("http://localhost:5000/api/finance");
   const data = await res.json();
@@ -117,7 +117,7 @@ async function loadFinance() {
   updateKPIs(data);
 }
 
-// KPIs
+
 function updateKPIs(data) {
   let revenue = 0;
   let expense = 0;
@@ -136,7 +136,7 @@ function updateKPIs(data) {
   drawChart(revenue, expense);
 }
 
-// CHART
+
 let chart;
 function drawChart(revenue, expense) {
   const ctx = document.getElementById("financeChart");
@@ -160,7 +160,7 @@ function drawChart(revenue, expense) {
   });
 }
 
-// SEARCH
+
 financeSearch.oninput = () => {
   const q = financeSearch.value.toLowerCase();
 

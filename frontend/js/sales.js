@@ -12,7 +12,7 @@ document.getElementById("closeDealModal").onclick = closeDealModal;
 document.getElementById("closeDealModal2").onclick = closeDealModal;
 form.addEventListener("click", e => { if (e.target === form) closeDealModal(); });
 
-// OPEN FORM
+
 const addDealBtn = document.getElementById("addDealBtn");
 addDealBtn.onclick = () => {
   formTitle.textContent = "Add Deal";
@@ -21,7 +21,7 @@ addDealBtn.onclick = () => {
   editingId = null;
 };
 
-// SAVE
+
 saveDeal.onclick = async () => {
   const client_name = cName.value;
   const deal_value = cValue.value;
@@ -48,7 +48,7 @@ saveDeal.onclick = async () => {
   loadDeals();
 };
 
-// EDIT
+
 function editDeal(id) {
   const d = deals.find((x) => x.id === id);
 
@@ -62,7 +62,7 @@ function editDeal(id) {
   openDealModal();
 }
 
-// DELETE
+
 async function deleteDeal(id) {
   if (!confirm("Delete deal?")) return;
 
@@ -73,7 +73,7 @@ async function deleteDeal(id) {
   loadDeals();
 }
 
-// LOAD
+
 async function loadDeals() {
   const res = await fetch("http://localhost:5000/api/sales");
   const data = await res.json();
@@ -99,7 +99,7 @@ async function loadDeals() {
   });
 }
 
-// SEARCH
+
 if (dealSearch) {
   dealSearch.oninput = () => {
     const q = dealSearch.value.toLowerCase();
@@ -109,5 +109,5 @@ if (dealSearch) {
   };
 }
 
-// INIT
+
 loadDeals();

@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const db = require("../config/db");
 
-// CREATE
+
 router.post("/", async (req, res) => {
   const { doc_name, type, due_date, status } = req.body;
 
@@ -13,13 +13,13 @@ router.post("/", async (req, res) => {
   res.json({ message: "Compliance added" });
 });
 
-// GET
+
 router.get("/", async (req, res) => {
   const [rows] = await db.execute("SELECT * FROM compliance ORDER BY due_date");
   res.json(rows);
 });
 
-// UPDATE
+
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
   const { doc_name, type, due_date, status } = req.body;
@@ -32,7 +32,7 @@ router.put("/:id", async (req, res) => {
   res.json({ message: "Compliance updated" });
 });
 
-// DELETE
+
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
 

@@ -22,13 +22,13 @@ document.getElementById("closeOpModal").onclick = closeOpModal;
 document.getElementById("closeOpModal2").onclick = closeOpModal;
 form.addEventListener("click", e => { if (e.target === form) closeOpModal(); });
 
-// OPEN
+
 addOpBtn.onclick = () => {
   editingId = null;
   openOpModal();
 };
 
-// SAVE
+
 saveOp.onclick = async () => {
   const item_name = oName.value;
   const category = oCat.value;
@@ -56,7 +56,7 @@ saveOp.onclick = async () => {
   loadOps();
 };
 
-// EDIT
+
 function editOp(id) {
   const o = opData.find((x) => x.id === id);
 
@@ -69,7 +69,7 @@ function editOp(id) {
   openOpModal();
 }
 
-// DELETE
+
 async function deleteOp(id) {
   if (!confirm("Delete item?")) return;
 
@@ -80,7 +80,7 @@ async function deleteOp(id) {
   loadOps();
 }
 
-// LOAD
+
 async function loadOps() {
   const res = await fetch("http://localhost:5000/api/operations");
   const data = await res.json();
@@ -89,7 +89,7 @@ async function loadOps() {
   renderTable(data);
 }
 
-// RENDER
+
 function renderTable(data) {
   table.innerHTML = "";
 
@@ -111,7 +111,7 @@ function renderTable(data) {
   });
 }
 
-// FILTER + SEARCH
+
 opSearch.oninput = applyFilters;
 catFilter.onchange = applyFilters;
 statusFilter.onchange = applyFilters;
@@ -131,5 +131,5 @@ function applyFilters() {
   renderTable(filtered);
 }
 
-// INIT
+
 loadOps();

@@ -1,6 +1,6 @@
 const API = "http://localhost:5000/api/auth";
 
-// ─── Officer role mapping: checkbox data-role → backend role name ────────────
+
 const ROLE_MAP = {
   "CTO": "Tech",
   "CFO": "Finance",
@@ -11,7 +11,7 @@ const ROLE_MAP = {
 
 const OFFICER_KEYS = Object.keys(ROLE_MAP);
 
-// ─── Toggle officer fields when checkbox is checked ─────────────────────────
+
 OFFICER_KEYS.forEach((role) => {
   const cb = document.querySelector(`.officer-cb[data-role="${role}"]`);
   const fields = document.getElementById(`fields-${role}`);
@@ -31,7 +31,7 @@ OFFICER_KEYS.forEach((role) => {
   });
 });
 
-// ─── Form submission ─────────────────────────────────────────────────────────
+
 const form = document.getElementById("registerForm");
 const msgEl = document.getElementById("message");
 const submitBtn = document.getElementById("submitBtn");
@@ -46,7 +46,7 @@ form.addEventListener("submit", async (e) => {
   const company_name = document.getElementById("companyName").value.trim();
   const founded_date = document.getElementById("foundedDate").value;
 
-  // Basic client-side validation
+
   if (!founder_name || !founder_email || !password || !company_name) {
     return showMessage("Please fill in all required company and founder fields.", "error");
   }
@@ -55,7 +55,7 @@ form.addEventListener("submit", async (e) => {
     return showMessage("Password must be at least 6 characters.", "error");
   }
 
-  // Validate: any checked officer must have email filled
+
   const invalidOfficer = OFFICER_KEYS.find((role) => {
     const cb = document.querySelector(`.officer-cb[data-role="${role}"]`);
     if (!cb?.checked) return false;
@@ -70,7 +70,7 @@ form.addEventListener("submit", async (e) => {
     );
   }
 
-  // Build officers object: { "Finance": "email", "Tech": "email", ... }
+
   const officers = {};
   OFFICER_KEYS.forEach((role) => {
     const cb = document.querySelector(`.officer-cb[data-role="${role}"]`);
@@ -122,7 +122,7 @@ form.addEventListener("submit", async (e) => {
   }
 });
 
-// ─── Helpers ─────────────────────────────────────────────────────────────────
+
 function showMessage(text, type) {
   msgEl.textContent = text;
   msgEl.className = `message ${type}`;
