@@ -1,227 +1,366 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Founder Dashboard</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/founder.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Overview — StartupOps</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-
 <body>
+<div class="app-layout">
+  <aside class="sidebar" id="sidebar">
+    <a class="sidebar-brand" href="founder.html">
+      <div class="brand-icon"><i class="bx bx-buildings"></i></div>
+      <span class="brand-name"></span>
+    </a>
+    <nav class="sidebar-nav" id="sidebarMenu"></nav>
+    <div class="sidebar-user">
+      <div class="user-avatar"></div>
+      <div class="user-details">
+        <span class="user-name-display"></span>
+        <span class="user-role-display"></span>
+      </div>
+    </div>
+  </aside>
 
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <div class="brand"></div>
-        </div>
-
-        <nav class="sidebar-nav" id="sidebarMenu"></nav>
-
-        <div class="user-profile">
-            <div class="user-avatar"></div>
-            <div class="user-info">
-                <span class="user-name-display"></span>
-                <span class="user-role-display"></span>
-            </div>
-        </div>
-    </aside>
-
-    <div class="main">
-
-        <h1>Founder Overview</h1>
-
-        <div class="kpi-row">
-            <div class="kpi-card">
-                <div>Total Revenue</div>
-                <div id="fRevenue" class="kpi-value money">₹0</div>
-            </div>
-
-            <div class="kpi-card">
-                <div>Total Expense</div>
-                <div id="fExpense" class="kpi-value money">₹0</div>
-            </div>
-
-            <div class="kpi-card">
-                <div>Net Profit</div>
-                <div id="fProfit" class="kpi-value money">₹0</div>
-            </div>
-
-            <div class="kpi-card">
-                <div>Employees</div>
-                <div id="fEmployees" class="kpi-value">0</div>
-            </div>
-            <div class="kpi-card">
-                <div>Pipeline</div>
-                <div id="fPipeline" class="kpi-value money">₹0</div>
-            </div>
-
-            <div class="kpi-card">
-                <div>Won Deals</div>
-                <div id="fWon" class="kpi-value">0</div>
-            </div>
-
-            <div class="kpi-card">
-                <div>Clients</div>
-                <div id="fClients" class="kpi-value">0</div>
-            </div>
-
-            <div class="kpi-card">
-                <div>Monthly Burn</div>
-                <div id="fBurn" class="kpi-value money">₹0</div>
-            </div>
-
-            <div class="kpi-card">
-                <div>Runway (Months)</div>
-                <div id="fRunway" class="kpi-value">0</div>
-            </div>
-            <div class="kpi-card">
-                <div>Marketing Spend</div>
-                <div id="fMSpend" class="kpi-value">₹0</div>
-            </div>
-
-            <div class="kpi-card">
-                <div>Leads</div>
-                <div id="fLeads" class="kpi-value">0</div>
-            </div>
-
-            <div class="kpi-card">
-                <div>Conversions</div>
-                <div id="fConversions" class="kpi-value">0</div>
-            </div>
-
-            <div class="kpi-card">
-                <div>Conversion Rate</div>
-                <div id="fCR" class="kpi-value">0%</div>
-            </div>
-            <div class="kpi-card">
-                <div>Features</div>
-                <div id="fFeatures" class="kpi-value">0</div>
-            </div>
-
-            <div class="kpi-card">
-                <div>Bugs</div>
-                <div id="fBugs" class="kpi-value">0</div>
-            </div>
-
-            <div class="kpi-card">
-                <div>Done %</div>
-                <div id="fDonePct" class="kpi-value">0%</div>
-            </div>
-
-            <div class="kpi-card">
-                <div>In Progress</div>
-                <div id="fInProg" class="kpi-value">0</div>
-            </div>
-
-            <div class="kpi-card">
-                <div>Planned</div>
-                <div id="fPlanned" class="kpi-value">0</div>
-            </div>
-            <div class="kpi-card">
-                <div>Compliance Docs</div>
-                <div id="fCompTotal" class="kpi-value">0</div>
-            </div>
-
-            <div class="kpi-card">
-                <div>Pending</div>
-                <div id="fCompPending" class="kpi-value">0</div>
-            </div>
-
-            <div class="kpi-card">
-                <div>Filed</div>
-                <div id="fCompFiled" class="kpi-value">0</div>
-            </div>
-
-            <div class="kpi-card">
-                <div>Expired</div>
-                <div id="fCompExpired" class="kpi-value">0</div>
-            </div>
-            <div class="kpi-card">
-                <div>Ops Items</div>
-                <div id="fOpsTotal" class="kpi-value">0</div>
-            </div>
-
-            <div class="kpi-card">
-                <div>Active</div>
-                <div id="fOpsActive" class="kpi-value">0</div>
-            </div>
-
-            <div class="kpi-card">
-                <div>Pending</div>
-                <div id="fOpsPending" class="kpi-value">0</div>
-            </div>
-
-            <div class="kpi-card">
-                <div>Inactive</div>
-                <div id="fOpsInactive" class="kpi-value">0</div>
-            </div>
-        </div>
-
-        <!-- CHARTS -->
-        <div class="grid">
-            <div class="panel">
-                <div class="panel-header">Revenue vs Expense</div>
-                <canvas id="revExpChart"></canvas>
-            </div>
-
-            <div class="panel">
-                <div class="panel-header">Employees by Dept</div>
-                <canvas id="empChart"></canvas>
-            </div>
-            <div class="panel">
-                <div class="panel-header">Deals by Status</div>
-                <canvas id="salesChart"></canvas>
-            </div>
-            <div class="panel">
-                <div class="panel-header">Leads by Channel</div>
-                <canvas id="marketingChart"></canvas>
-            </div>
-            <div class="panel">
-                <div class="panel-header">Product Status</div>
-                <canvas id="productChart"></canvas>
-            </div>
-            <div class="panel">
-                <div class="panel-header">Compliance Status</div>
-                <canvas id="complianceChart"></canvas>
-            </div>
-            <div class="panel">
-                <div class="panel-header">Operations Status</div>
-                <canvas id="operationsChart"></canvas>
-            </div>
-        </div>
-
-        <div class="grid">
-            <div class="panel">
-                <div class="panel-header">Recent Transactions</div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Type</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody id="recentFinance"></tbody>
-                </table>
-            </div>
-
-            <div class="panel">
-                <div class="panel-header">Recent Employees</div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Dept</th>
-                        </tr>
-                    </thead>
-                    <tbody id="recentEmployees"></tbody>
-                </table>
-            </div>
-        </div>
+  <!-- ── Main Content ── -->
+  <div class="main-content">
+    <div class="page-header">
+      <div class="page-header-left">
+        <span class="page-eyebrow">Founder</span>
+        <h1 class="page-title">Company Overview</h1>
+        <p class="page-subtitle">Cross-department snapshot of your startup</p>
+      </div>
     </div>
 
-    <script src="../js/sidebar.js"></script>
-    <script src="../js/founder.js"></script>
-</body>
+    <div class="content-body">
 
+      <!-- ═══════════════════════════════════════════
+           SECTION 1: Finance
+      ═══════════════════════════════════════════ -->
+      <div class="section-label"><i class='bx bx-line-chart'></i> Finance</div>
+      <div class="kpi-grid">
+        <div class="kpi-card kpi-indigo">
+          <div class="kpi-body">
+            <span class="kpi-label">Total Revenue</span>
+            <span class="kpi-value" id="fRevenue">₹0</span>
+          </div>
+        </div>
+        <div class="kpi-card kpi-red">
+          <div class="kpi-body">
+            <span class="kpi-label">Total Expense</span>
+            <span class="kpi-value" id="fExpense">₹0</span>
+          </div>
+        </div>
+        <div class="kpi-card kpi-green">
+          <div class="kpi-body">
+            <span class="kpi-label">Net Profit</span>
+            <span class="kpi-value" id="fProfit">₹0</span>
+          </div>
+        </div>
+        <div class="kpi-card kpi-amber">
+          <div class="kpi-body">
+            <span class="kpi-label">Monthly Burn</span>
+            <span class="kpi-value" id="fBurn">₹0</span>
+          </div>
+        </div>
+        <div class="kpi-card kpi-cyan">
+          <div class="kpi-body">
+            <span class="kpi-label">Runway (Months)</span>
+            <span class="kpi-value" id="fRunway">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart row: Finance -->
+      <div class="grid-2">
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">Revenue vs Expense</span></div>
+          <div class="panel-body"><canvas id="revExpChart" style="max-height:280px"></canvas></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">Recent Transactions</span></div>
+          <div class="panel-body">
+            <table>
+              <thead><tr><th>Date</th><th>Type</th><th>Amount</th></tr></thead>
+              <tbody id="recentFinance"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════
+           SECTION 2: Sales
+      ═══════════════════════════════════════════ -->
+      <div class="section-label"><i class='bx bx-trending-up'></i> Sales</div>
+      <div class="kpi-grid">
+        <div class="kpi-card kpi-indigo">
+          <div class="kpi-body">
+            <span class="kpi-label">Pipeline Value</span>
+            <span class="kpi-value" id="fPipeline">₹0</span>
+          </div>
+        </div>
+        <div class="kpi-card kpi-green">
+          <div class="kpi-body">
+            <span class="kpi-label">Won Deals</span>
+            <span class="kpi-value" id="fWon">0</span>
+          </div>
+        </div>
+        <div class="kpi-card kpi-purple">
+          <div class="kpi-body">
+            <span class="kpi-label">Clients</span>
+            <span class="kpi-value" id="fClients">0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">Deals by Status</span></div>
+          <div class="panel-body"><canvas id="salesChart" style="max-height:260px"></canvas></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">Top Deals</span></div>
+          <div class="panel-body">
+            <table>
+              <thead><tr><th>Client</th><th>Value</th><th>Status</th></tr></thead>
+              <tbody id="recentSales"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════
+           SECTION 3: HR
+      ═══════════════════════════════════════════ -->
+      <div class="section-label"><i class='bx bx-group'></i> Human Resources</div>
+      <div class="kpi-grid">
+        <div class="kpi-card kpi-cyan">
+          <div class="kpi-body">
+            <span class="kpi-label">Employees</span>
+            <span class="kpi-value" id="fEmployees">0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">Employees by Department</span></div>
+          <div class="panel-body"><canvas id="empChart" style="max-height:260px"></canvas></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">Recent Employees</span></div>
+          <div class="panel-body">
+            <table>
+              <thead><tr><th>Name</th><th>Dept</th></tr></thead>
+              <tbody id="recentEmployees"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════
+           SECTION 4: Marketing
+      ═══════════════════════════════════════════ -->
+      <div class="section-label"><i class='bx bx-broadcast'></i> Marketing</div>
+      <div class="kpi-grid">
+        <div class="kpi-card kpi-amber">
+          <div class="kpi-body">
+            <span class="kpi-label">Marketing Spend</span>
+            <span class="kpi-value" id="fMSpend">₹0</span>
+          </div>
+        </div>
+        <div class="kpi-card kpi-indigo">
+          <div class="kpi-body">
+            <span class="kpi-label">Leads</span>
+            <span class="kpi-value" id="fLeads">0</span>
+          </div>
+        </div>
+        <div class="kpi-card kpi-green">
+          <div class="kpi-body">
+            <span class="kpi-label">Conversions</span>
+            <span class="kpi-value" id="fConversions">0</span>
+          </div>
+        </div>
+        <div class="kpi-card kpi-purple">
+          <div class="kpi-body">
+            <span class="kpi-label">Conversion Rate</span>
+            <span class="kpi-value" id="fCR">0%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">Leads by Channel</span></div>
+          <div class="panel-body"><canvas id="marketingChart" style="max-height:280px"></canvas></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">Top Campaigns</span></div>
+          <div class="panel-body">
+            <table>
+              <thead><tr><th>Channel</th><th>Leads</th><th>Conv.</th></tr></thead>
+              <tbody id="recentMarketing"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════
+           SECTION 5: Product / Tech
+      ═══════════════════════════════════════════ -->
+      <div class="section-label"><i class='bx bx-chip'></i> Product &amp; Tech</div>
+      <div class="kpi-grid">
+        <div class="kpi-card kpi-indigo">
+          <div class="kpi-body">
+            <span class="kpi-label">Features</span>
+            <span class="kpi-value" id="fFeatures">0</span>
+          </div>
+        </div>
+        <div class="kpi-card kpi-red">
+          <div class="kpi-body">
+            <span class="kpi-label">Bugs</span>
+            <span class="kpi-value" id="fBugs">0</span>
+          </div>
+        </div>
+        <div class="kpi-card kpi-green">
+          <div class="kpi-body">
+            <span class="kpi-label">Done %</span>
+            <span class="kpi-value" id="fDonePct">0%</span>
+          </div>
+        </div>
+        <div class="kpi-card kpi-amber">
+          <div class="kpi-body">
+            <span class="kpi-label">In Progress</span>
+            <span class="kpi-value" id="fInProg">0</span>
+          </div>
+        </div>
+        <div class="kpi-card kpi-cyan">
+          <div class="kpi-body">
+            <span class="kpi-label">Planned</span>
+            <span class="kpi-value" id="fPlanned">0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">Product Status</span></div>
+          <div class="panel-body"><canvas id="productChart" style="max-height:260px"></canvas></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">Recent Backlog</span></div>
+          <div class="panel-body">
+            <table>
+              <thead><tr><th>Item</th><th>Type</th><th>Status</th></tr></thead>
+              <tbody id="recentProduct"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════
+           SECTION 6: Compliance
+      ═══════════════════════════════════════════ -->
+      <div class="section-label"><i class='bx bx-shield-check'></i> Compliance</div>
+      <div class="kpi-grid">
+        <div class="kpi-card kpi-indigo">
+          <div class="kpi-body">
+            <span class="kpi-label">Total Docs</span>
+            <span class="kpi-value" id="fCompTotal">0</span>
+          </div>
+        </div>
+        <div class="kpi-card kpi-amber">
+          <div class="kpi-body">
+            <span class="kpi-label">Pending</span>
+            <span class="kpi-value" id="fCompPending">0</span>
+          </div>
+        </div>
+        <div class="kpi-card kpi-green">
+          <div class="kpi-body">
+            <span class="kpi-label">Filed</span>
+            <span class="kpi-value" id="fCompFiled">0</span>
+          </div>
+        </div>
+        <div class="kpi-card kpi-red">
+          <div class="kpi-body">
+            <span class="kpi-label">Expired</span>
+            <span class="kpi-value" id="fCompExpired">0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">Compliance Status</span></div>
+          <div class="panel-body"><canvas id="complianceChart" style="max-height:260px"></canvas></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">Upcoming Deadlines</span></div>
+          <div class="panel-body">
+            <table>
+              <thead><tr><th>Document</th><th>Due</th><th>Status</th></tr></thead>
+              <tbody id="recentCompliance"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════
+           SECTION 7: Operations
+      ═══════════════════════════════════════════ -->
+      <div class="section-label"><i class='bx bx-cog'></i> Operations</div>
+      <div class="kpi-grid">
+        <div class="kpi-card kpi-indigo">
+          <div class="kpi-body">
+            <span class="kpi-label">Total Items</span>
+            <span class="kpi-value" id="fOpsTotal">0</span>
+          </div>
+        </div>
+        <div class="kpi-card kpi-green">
+          <div class="kpi-body">
+            <span class="kpi-label">Active</span>
+            <span class="kpi-value" id="fOpsActive">0</span>
+          </div>
+        </div>
+        <div class="kpi-card kpi-amber">
+          <div class="kpi-body">
+            <span class="kpi-label">Pending</span>
+            <span class="kpi-value" id="fOpsPending">0</span>
+          </div>
+        </div>
+        <div class="kpi-card kpi-red">
+          <div class="kpi-body">
+            <span class="kpi-label">Inactive</span>
+            <span class="kpi-value" id="fOpsInactive">0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">Operations Status</span></div>
+          <div class="panel-body"><canvas id="operationsChart" style="max-height:260px"></canvas></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">Operations Items</span></div>
+          <div class="panel-body">
+            <table>
+              <thead><tr><th>Item</th><th>Category</th><th>Status</th></tr></thead>
+              <tbody id="recentOps"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content-body -->
+  </div><!-- /main-content -->
+
+</div><!-- /app-layout -->
+
+<script src="../js/sidebar.js"></script>
+<script src="../js/founder.js"></script>
+</body>
 </html>

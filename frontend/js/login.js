@@ -43,7 +43,7 @@ form.addEventListener("submit", async (e) => {
 
     switch (role) {
       case "Founder":
-        redirectPage = "dashboard.html";
+        redirectPage = "founder.html";
         break;
 
       case "Finance":

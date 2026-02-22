@@ -28,7 +28,7 @@ const iconMap = {
   "Marketing":  "bx-broadcast",
   "Sales":      "bx-trending-up",
   "Product":    "bx-chip",
-  "Compliance": "bx-shield-check",
+  "Compliance": "bx-shield-quarter",
   "Operations": "bx-cog",
   "Investors":  "bx-dollar-circle",
   "Logout":     "bx-log-out-circle"
@@ -37,7 +37,7 @@ const iconMap = {
 // Role-based nav
 const navMap = {
   "Founder": [
-    { name: "Dashboard",  link: "dashboard.html" },
+    { name: "Overview",  link: "founder.html" },
     { name: "Finance",    link: "finance.html" },
     { name: "HR",         link: "hr.html" },
     { name: "Sales",      link: "sales.html" },

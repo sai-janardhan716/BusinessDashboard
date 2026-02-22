@@ -76,6 +76,18 @@ function computeFinance(finance) {
   set("fRunway", runway);
 
   drawFinanceChart(monthlyRev, monthlyExp);
+
+  // Populate recent transactions table
+  const rf = document.getElementById("recentFinance");
+  if (rf) {
+    rf.innerHTML = "";
+    finance.slice(0, 5).forEach(t => {
+      const tr = document.createElement("tr");
+      const d = t.date ? new Date(t.date).toLocaleDateString("en-IN") : "—";
+      tr.innerHTML = `<td>${d}</td><td>${t.type}</td><td>${money(t.amount)}</td>`;
+      rf.appendChild(tr);
+    });
+  }
 }
 function computeHR(employees) {
   set("fEmployees", employees.length);
@@ -120,6 +132,16 @@ function computeSales(sales) {
   set("fClients", clients.size);
 
   drawSalesChart(status);
+
+  const rs = document.getElementById("recentSales");
+  if (rs) {
+    rs.innerHTML = "";
+    sales.slice(0, 5).forEach(d => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${d.client_name}</td><td>${money(d.deal_value)}</td><td>${d.status}</td>`;
+      rs.appendChild(tr);
+    });
+  }
 }
 function computeMarketing(marketing) {
   let spend = 0;
@@ -144,6 +166,16 @@ function computeMarketing(marketing) {
   set("fCR", cr + "%");
 
   drawMarketingChart(channel);
+
+  const rm = document.getElementById("recentMarketing");
+  if (rm) {
+    rm.innerHTML = "";
+    marketing.slice(0, 5).forEach(c => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${c.channel}</td><td>${c.leads}</td><td>${c.conversions}</td>`;
+      rm.appendChild(tr);
+    });
+  }
 }
 function computeProduct(product) {
   let features=0, bugs=0;
@@ -168,6 +200,16 @@ function computeProduct(product) {
   set("fDonePct",donePct+"%");
 
   drawProductChart(done,inprog,planned);
+
+  const rp = document.getElementById("recentProduct");
+  if (rp) {
+    rp.innerHTML = "";
+    product.slice(0, 5).forEach(p => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${p.feature_name || p.title || '—'}</td><td>${p.type}</td><td>${p.status}</td>`;
+      rp.appendChild(tr);
+    });
+  }
 }
 function computeCompliance(data){
   let pending=0, filed=0, expired=0;
@@ -184,6 +226,17 @@ function computeCompliance(data){
   set("fCompExpired",expired);
 
   drawComplianceChart(pending,filed,expired);
+
+  const rc = document.getElementById("recentCompliance");
+  if (rc) {
+    rc.innerHTML = "";
+    data.slice(0, 5).forEach(c => {
+      const tr = document.createElement("tr");
+      const due = c.due_date ? new Date(c.due_date).toLocaleDateString("en-IN") : "—";
+      tr.innerHTML = `<td>${c.doc_name}</td><td>${due}</td><td>${c.status}</td>`;
+      rc.appendChild(tr);
+    });
+  }
 }
 function computeOperations(data){
   let active=0,pending=0,inactive=0;
@@ -200,9 +253,67 @@ function computeOperations(data){
   set("fOpsInactive",inactive);
 
   drawOperationsChart(active,pending,inactive);
+
+  const ro = document.getElementById("recentOps");
+  if (ro) {
+    ro.innerHTML = "";
+    data.slice(0, 5).forEach(o => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${o.item_name}</td><td>${o.category}</td><td>${o.status}</td>`;
+      ro.appendChild(tr);
+    });
+  }
 }
 
 let financeChart, empChart, salesChart, marketingChart, productChart, complianceChart, operationsChart;
+
+// Color palette for doughnut charts
+const CHART_COLORS = ["#6366f1","#10b981","#f59e0b","#ef4444","#06b6d4","#8b5cf6","#ec4899","#14b8a6"];
+
+// Custom plugin to draw percentage labels on doughnut slices
+const percentLabelPlugin = {
+  id: "percentLabels",
+  afterDraw(chart) {
+    if (chart.config.type !== "doughnut") return;
+    const { ctx } = chart;
+    const dataset = chart.data.datasets[0];
+    const total = dataset.data.reduce((a, b) => a + b, 0);
+    if (!total) return;
+
+    const meta = chart.getDatasetMeta(0);
+    meta.data.forEach((arc, i) => {
+      const val = dataset.data[i];
+      const pct = ((val / total) * 100).toFixed(1) + "%";
+      if (val === 0) return;
+
+      // Position at the midpoint of the arc
+      const { x, y } = arc.tooltipPosition();
+
+      ctx.save();
+      ctx.font = "bold 12px Inter, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      // Shadow for readability
+      ctx.fillStyle = "rgba(0,0,0,0.5)";
+      ctx.fillText(pct, x + 1, y + 1);
+      // White text
+      ctx.fillStyle = "#fff";
+      ctx.fillText(pct, x, y);
+      ctx.restore();
+    });
+  }
+};
+
+// Dark theme defaults for all charts
+const darkThemeOptions = {
+  responsive: true,
+  maintainAspectRatio: true,
+  plugins: {
+    legend: {
+      labels: { color: "#94a3b8", font: { family: "Inter", size: 12 } }
+    }
+  }
+};
 
 function drawFinanceChart(rev,exp){
   const ctx=document.getElementById("revExpChart");
@@ -214,10 +325,37 @@ function drawFinanceChart(rev,exp){
     data:{
       labels:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
       datasets:[
-        {label:"Revenue",data:rev,borderColor:"#4f46e5",fill:true,tension:.4},
-        {label:"Expense",data:exp,borderColor:"#ef4444",fill:true,tension:.4}
+        {label:"Revenue",data:rev,borderColor:"#6366f1",backgroundColor:"rgba(99,102,241,0.1)",fill:true,tension:.4},
+        {label:"Expense",data:exp,borderColor:"#ef4444",backgroundColor:"rgba(239,68,68,0.1)",fill:true,tension:.4}
       ]
+    },
+    options:{
+      ...darkThemeOptions,
+      scales:{
+        x:{ ticks:{ color:"#94a3b8" }, grid:{ color:"rgba(255,255,255,0.05)" } },
+        y:{ ticks:{ color:"#94a3b8" }, grid:{ color:"rgba(255,255,255,0.05)" } }
+      }
     }
+  });
+}
+
+function makeDoughnut(ctx, labels, data) {
+  return new Chart(ctx, {
+    type: "doughnut",
+    data: {
+      labels,
+      datasets: [{
+        data,
+        backgroundColor: CHART_COLORS.slice(0, labels.length),
+        borderColor: "rgba(0,0,0,0.3)",
+        borderWidth: 2
+      }]
+    },
+    options: {
+      ...darkThemeOptions,
+      cutout: "55%"
+    },
+    plugins: [percentLabelPlugin]
   });
 }
 
@@ -225,42 +363,59 @@ function drawEmpChart(d){
   const ctx=document.getElementById("empChart");
   if(!ctx) return;
   if(empChart) empChart.destroy();
-  empChart=new Chart(ctx,{type:"doughnut",data:{labels:Object.keys(d),datasets:[{data:Object.values(d)}]}});
+  empChart = makeDoughnut(ctx, Object.keys(d), Object.values(d));
 }
 
 function drawSalesChart(s){
   const ctx=document.getElementById("salesChart");
   if(!ctx) return;
   if(salesChart) salesChart.destroy();
-  salesChart=new Chart(ctx,{type:"doughnut",data:{labels:Object.keys(s),datasets:[{data:Object.values(s)}]}});
+  salesChart = makeDoughnut(ctx, Object.keys(s), Object.values(s));
 }
 
 function drawMarketingChart(c){
   const ctx=document.getElementById("marketingChart");
   if(!ctx) return;
   if(marketingChart) marketingChart.destroy();
-  marketingChart=new Chart(ctx,{type:"bar",data:{labels:Object.keys(c),datasets:[{data:Object.values(c)}]}});
+  marketingChart=new Chart(ctx,{
+    type:"bar",
+    data:{
+      labels:Object.keys(c),
+      datasets:[{
+        data:Object.values(c),
+        backgroundColor: CHART_COLORS.slice(0, Object.keys(c).length),
+        borderRadius: 6
+      }]
+    },
+    options:{
+      ...darkThemeOptions,
+      scales:{
+        x:{ ticks:{ color:"#94a3b8" }, grid:{ display:false } },
+        y:{ ticks:{ color:"#94a3b8" }, grid:{ color:"rgba(255,255,255,0.05)" } }
+      }
+    }
+  });
 }
 
 function drawProductChart(d,i,p){
   const ctx=document.getElementById("productChart");
   if(!ctx) return;
   if(productChart) productChart.destroy();
-  productChart=new Chart(ctx,{type:"doughnut",data:{labels:["Done","In Progress","Planned"],datasets:[{data:[d,i,p]}]}});
+  productChart = makeDoughnut(ctx, ["Done","In Progress","Planned"], [d,i,p]);
 }
 
 function drawComplianceChart(p,f,e){
   const ctx=document.getElementById("complianceChart");
   if(!ctx) return;
   if(complianceChart) complianceChart.destroy();
-  complianceChart=new Chart(ctx,{type:"doughnut",data:{labels:["Pending","Filed","Expired"],datasets:[{data:[p,f,e]}]}});
+  complianceChart = makeDoughnut(ctx, ["Pending","Filed","Expired"], [p,f,e]);
 }
 
 function drawOperationsChart(a,p,i){
   const ctx=document.getElementById("operationsChart");
   if(!ctx) return;
   if(operationsChart) operationsChart.destroy();
-  operationsChart=new Chart(ctx,{type:"doughnut",data:{labels:["Active","Pending","Inactive"],datasets:[{data:[a,p,i]}]}});
+  operationsChart = makeDoughnut(ctx, ["Active","Pending","Inactive"], [a,p,i]);
 }
 
 loadFounder();
