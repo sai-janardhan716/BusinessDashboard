@@ -29,6 +29,7 @@ body::before {
   z-index: 1;
 }
 .brand-header {
+  margin-left: 10px;
   display: flex;
   align-items: center;
   gap: 10px;
