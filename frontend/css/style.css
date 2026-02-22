@@ -379,7 +379,7 @@ body {
 
 .kpi-icon.indigo {
   background: rgba(99, 102, 241, 0.12);
-  color: #6366f1;
+  color: white;
 }
 
 .kpi-green {
@@ -388,7 +388,7 @@ body {
 
 .kpi-icon.green {
   background: rgba(16, 185, 129, 0.12);
-  color: #10b981;
+  color: white;
 }
 
 .kpi-amber {
@@ -397,7 +397,7 @@ body {
 
 .kpi-icon.amber {
   background: rgba(245, 158, 11, 0.12);
-  color: #f59e0b;
+  color: white;
 }
 
 .kpi-cyan {
@@ -424,7 +424,7 @@ body {
 
 .kpi-icon.red {
   background: rgba(239, 68, 68, 0.12);
-  color: #ef4444;
+  color: white;
 }
 
 
@@ -484,6 +484,9 @@ body {
 
 .panel-body {
   padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .grid-2 {
@@ -538,6 +541,68 @@ tbody tr:hover td {
   font-weight: 500;
 }
 
+.pagination-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-top: 1px solid var(--border);
+  font-size: 0.82rem;
+  color: var(--text-2);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.page-numbers {
+  display: flex;
+  gap: 2px;
+}
+
+.page-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-2);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.15s;
+}
+
+.page-btn:hover { background: var(--surface-3); color: var(--text-1); }
+.page-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+.pagination-size {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pagination-size label {
+  color: var(--text-3);
+  font-size: 0.8rem;
+}
+
+.pagination-size select {
+  width: auto;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+}
+
+.pagination-controls button:disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
 
 .toolbar {
   display: flex;
@@ -1059,4 +1124,8 @@ label {
     padding-left: 16px;
     padding-right: 16px;
   }
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
 }
