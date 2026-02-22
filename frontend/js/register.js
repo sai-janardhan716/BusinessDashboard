@@ -1,10 +1,18 @@
 const API = "http://localhost:5000/api/auth";
 
-// ─── Officer role definitions (must match backend) ──────────────────────────
-const OFFICER_ROLES = ["CTO", "CFO", "CMO", "CCO", "Head of Sales"];
+// ─── Officer role mapping: checkbox data-role → backend role name ────────────
+const ROLE_MAP = {
+  "CTO": "Tech",
+  "CFO": "Finance",
+  "CMO": "Marketing",
+  "CCO": "Compliance",
+  "Head of Sales": "Sales",
+};
+
+const OFFICER_KEYS = Object.keys(ROLE_MAP);
 
 // ─── Toggle officer fields when checkbox is checked ─────────────────────────
-OFFICER_ROLES.forEach((role) => {
+OFFICER_KEYS.forEach((role) => {
   const cb = document.querySelector(`.officer-cb[data-role="${role}"]`);
   const fields = document.getElementById(`fields-${role}`);
   const wrap = document.getElementById(`wrap-${role}`);
@@ -18,7 +26,6 @@ OFFICER_ROLES.forEach((role) => {
     } else {
       fields.classList.remove("visible");
       wrap.classList.remove("checked");
-      // Clear fields when unchecked
       fields.querySelectorAll("input").forEach((i) => (i.value = ""));
     }
   });
@@ -33,52 +40,48 @@ form.addEventListener("submit", async (e) => {
   e.preventDefault();
   clearMessage();
 
-  const founderName = document.getElementById("founderName").value.trim();
-  const founderEmail = document.getElementById("founderEmail").value.trim();
+  const founder_name = document.getElementById("founderName").value.trim();
+  const founder_email = document.getElementById("founderEmail").value.trim();
   const password = document.getElementById("password").value;
-  const companyName = document.getElementById("companyName").value.trim();
-  const foundedDate = document.getElementById("foundedDate").value;
+  const company_name = document.getElementById("companyName").value.trim();
+  const founded_date = document.getElementById("foundedDate").value;
 
   // Basic client-side validation
-  if (!founderName || !founderEmail || !password || !companyName) {
+  if (!founder_name || !founder_email || !password || !company_name) {
     return showMessage("Please fill in all required company and founder fields.", "error");
   }
 
-  if (password.length < 8) {
-    return showMessage("Password must be at least 8 characters.", "error");
+  if (password.length < 6) {
+    return showMessage("Password must be at least 6 characters.", "error");
   }
 
-  // Collect checked officers
-  const officers = [];
-  OFFICER_ROLES.forEach((role) => {
-    const cb = document.querySelector(`.officer-cb[data-role="${role}"]`);
-    if (!cb?.checked) return;
-
-    const name = document.getElementById(`name-${role}`)?.value.trim();
-    const email = document.getElementById(`email-${role}`)?.value.trim();
-
-    if (!name || !email) {
-      // Will show per-role error below
-      return;
-    }
-    officers.push({ title: role, name, email });
-  });
-
-  // Validate: any checked officer must have name + email
-  const invalidOfficer = OFFICER_ROLES.find((role) => {
+  // Validate: any checked officer must have email filled
+  const invalidOfficer = OFFICER_KEYS.find((role) => {
     const cb = document.querySelector(`.officer-cb[data-role="${role}"]`);
     if (!cb?.checked) return false;
-    const name = document.getElementById(`name-${role}`)?.value.trim();
     const email = document.getElementById(`email-${role}`)?.value.trim();
-    return !name || !email;
+    return !email;
   });
 
   if (invalidOfficer) {
     return showMessage(
-      `Please enter name and email for the selected ${invalidOfficer} officer.`,
+      `Please enter an email for the selected ${invalidOfficer} officer.`,
       "error"
     );
   }
+
+  // Build officers object: { "Finance": "email", "Tech": "email", ... }
+  const officers = {};
+  OFFICER_KEYS.forEach((role) => {
+    const cb = document.querySelector(`.officer-cb[data-role="${role}"]`);
+    if (!cb?.checked) return;
+
+    const email = document.getElementById(`email-${role}`)?.value.trim();
+    if (!email) return;
+
+    const backendRole = ROLE_MAP[role];
+    officers[backendRole] = email;
+  });
 
   setLoading(true);
 
@@ -86,7 +89,14 @@ form.addEventListener("submit", async (e) => {
     const res = await fetch(`${API}/founder-register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ founderName, founderEmail, password, companyName, foundedDate, officers }),
+      body: JSON.stringify({
+        company_name,
+        founded_date,
+        founder_name,
+        founder_email,
+        password,
+        officers,
+      }),
     });
 
     const data = await res.json();
@@ -95,15 +105,11 @@ form.addEventListener("submit", async (e) => {
       return showMessage(data.message || "Registration failed.", "error");
     }
 
-    // Count email results
-    const sent = (data.emailResults || []).filter((r) => r.status === "sent").length;
-    const failed = (data.emailResults || []).filter((r) => r.status === "email_failed").length;
-
-    let detail = `${officers.length} officer(s) invited.`;
-    if (sent > 0) detail += ` ${sent} email(s) sent.`;
-    if (failed > 0) detail += ` ⚠️ ${failed} email(s) could not be delivered — check server email config.`;
-
-    showMessage(`✅ Company registered! ${detail} Redirecting to login…`, "success");
+    const officerCount = Object.keys(officers).length;
+    showMessage(
+      `✅ Company registered! ${officerCount} officer(s) created. Redirecting to login…`,
+      "success"
+    );
 
     setTimeout(() => {
       window.location.href = "login.html";
@@ -133,6 +139,6 @@ function setLoading(loading) {
     submitBtn.innerHTML = `<span class="spinner"></span> Registering…`;
   } else {
     submitBtn.disabled = false;
-    submitBtn.innerHTML = `<i class="bx bx-rocket"></i> Launch StartupOps`;
+    submitBtn.innerHTML = `<i class="bx bx-rocket"></i> Launch your Dashboard`;
   }
 }

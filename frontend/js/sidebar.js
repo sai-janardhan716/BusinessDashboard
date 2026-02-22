@@ -8,6 +8,12 @@ if (!userData) {
 
 const user = JSON.parse(userData);
 
+// Set company name in sidebar brand (falls back to "StartupOps")
+const companyName = user.company_name || "StartupOps";
+document.querySelectorAll(".brand-name, .brand").forEach(el => {
+  el.textContent = companyName;
+});
+
 // Populate user info
 document.querySelector(".user-name-display").textContent = user.name || "User";
 document.querySelector(".user-role-display").textContent = user.role || "";
