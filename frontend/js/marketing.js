@@ -99,6 +99,24 @@ async function loadCampaigns() {
 
   campData = data;
   renderTable(data);
+  updateMarketingKPIs(data);
+}
+
+function updateMarketingKPIs(data) {
+  let totalSpend = 0;
+  let totalLeads = 0;
+  let totalConv = 0;
+
+  data.forEach(c => {
+    totalSpend += Number(c.spend || 0);
+    totalLeads += Number(c.leads || 0);
+    totalConv += Number(c.conversions || 0);
+  });
+
+  document.getElementById("totalCamps").textContent = data.length;
+  document.getElementById("totalLeads").textContent = totalLeads.toLocaleString();
+  document.getElementById("totalConversions").textContent = totalConv.toLocaleString();
+  document.getElementById("totalSpend").textContent = "₹" + totalSpend.toLocaleString();
 }
 
 
