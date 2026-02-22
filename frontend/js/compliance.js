@@ -85,22 +85,46 @@ async function deleteComp(id) {
 
 
 
+let currentCompliancePage = 1;
+let pageSize = 10;
+let filteredData = [];
+
 async function loadCompliance() {
   const res = await fetch("http://localhost:5000/api/compliance");
   const data = await res.json();
-
   compData = data;
-  renderTable(data);
+  filteredData = data;
+  currentCompliancePage = 1;
+  renderTable();
+  updateComplianceKPIs(data);
 }
 
-
-
-function renderTable(data) {
-  table.innerHTML = "";
+function updateComplianceKPIs(data) {
+  let filed = 0, pending = 0, expired = 0;
 
   data.forEach(c => {
-    const tr = document.createElement("tr");
+    if (c.status === "Filed") filed++;
+    if (c.status === "Pending") pending++;
+    if (c.status === "Expired") expired++;
+  });
 
+  document.getElementById("totalDocs").textContent = data.length;
+  document.getElementById("filedDocs").textContent = filed;
+  document.getElementById("pendingDocs").textContent = pending;
+  document.getElementById("expiredDocs").textContent = expired;
+}
+
+function renderTable() {
+  table.innerHTML = "";
+
+  const totalPages = Math.max(1, Math.ceil(filteredData.length / pageSize));
+  if (currentCompliancePage > totalPages) currentCompliancePage = totalPages;
+
+  const start = (currentCompliancePage - 1) * pageSize;
+  const pageData = filteredData.slice(start, start + pageSize);
+
+  pageData.forEach(c => {
+    const tr = document.createElement("tr");
     tr.innerHTML = `
       <td class="td-name">${c.doc_name}</td>
       <td>${c.type}</td>
@@ -111,34 +135,52 @@ function renderTable(data) {
         <button onclick="deleteComp(${c.id})" class="btn btn-sm btn-danger">Delete</button>
       </td>
     `;
-
     table.appendChild(tr);
   });
+
+  const end = Math.min(start + pageSize, filteredData.length);
+  document.getElementById("pageInfo").textContent =
+    filteredData.length === 0 ? "No entries" : `${start + 1}–${end} of ${filteredData.length}`;
+
+  document.getElementById("prevPage").disabled = currentCompliancePage <= 1;
+  document.getElementById("nextPage").disabled = currentCompliancePage >= totalPages;
+
+  const pnEl = document.getElementById("pageNumbers");
+  pnEl.innerHTML = "";
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement("button");
+    btn.className = "page-btn" + (i === currentCompliancePage ? " active" : "");
+    btn.textContent = i;
+    btn.onclick = () => { currentCompliancePage = i; renderTable(); };
+    pnEl.appendChild(btn);
+  }
 }
 
+function changePage(dir) {
+  currentCompliancePage += dir;
+  renderTable();
+}
 
+function changePageSize(val) {
+  pageSize = parseInt(val);
+  currentCompliancePage = 1;
+  renderTable();
+}
 
-compSearch.oninput = () => {
-  applyFilters();
-};
-
-
-statusFilter.onchange = () => {
-  applyFilters();
-};
+compSearch.oninput = applyFilters;
+statusFilter.onchange = applyFilters;
 
 function applyFilters() {
   const q = compSearch.value.toLowerCase();
   const s = statusFilter.value;
 
-  const filtered = compData.filter(c =>
+  filteredData = compData.filter(c =>
     c.doc_name.toLowerCase().includes(q) &&
     (s === "" || c.status === s)
   );
 
-  renderTable(filtered);
+  currentCompliancePage = 1;
+  renderTable();
 }
-
-
 
 loadCompliance();
