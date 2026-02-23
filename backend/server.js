@@ -19,7 +19,6 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 
-// Protected data routes
 app.use("/api/finance", auth, financeRoutes);
 app.use("/api/employees", auth, empRoutes);
 app.use("/api/sales", auth, salesRoutes);
