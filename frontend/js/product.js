@@ -43,14 +43,14 @@ saveProd.onclick = async () => {
   if (editingId) {
     await fetch(`http://localhost:5000/api/product/${editingId}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: getAuthHeaders(),
       body: JSON.stringify({ feature_name, type, status, priority, owner }),
     });
     editingId = null;
   } else {
     await fetch("http://localhost:5000/api/product", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: getAuthHeaders(),
       body: JSON.stringify({ feature_name, type, status, priority, owner }),
     });
   }
@@ -79,6 +79,7 @@ async function deleteProd(id) {
 
   await fetch(`http://localhost:5000/api/product/${id}`, {
     method: "DELETE",
+    headers: getAuthHeaders(),
   });
 
   loadProduct();
@@ -90,7 +91,9 @@ let pageSize = 5;
 let filteredData = [];
 
 async function loadProduct() {
-  const res = await fetch("http://localhost:5000/api/product");
+  const res = await fetch("http://localhost:5000/api/product", {
+    headers: getAuthHeaders(),
+  });
   const data = await res.json();
   prodData = data;
   filteredData = data;

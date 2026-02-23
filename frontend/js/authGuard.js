@@ -1,7 +1,13 @@
+const guardToken = localStorage.getItem("token");
+const guardUser = localStorage.getItem("user");
 
-const token = localStorage.getItem("token");
-const user = localStorage.getItem("user");
-
-if (!token || !user) {
+if (!guardToken || !guardUser) {
   window.location.href = "login.html";
+}
+
+function getAuthHeaders() {
+  return {
+    "Authorization": `Bearer ${localStorage.getItem("token")}`,
+    "Content-Type": "application/json"
+  };
 }

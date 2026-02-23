@@ -33,13 +33,13 @@ saveDeal.onclick = async () => {
   if (editingId) {
     await fetch(`http://localhost:5000/api/sales/${editingId}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: getAuthHeaders(),
       body: JSON.stringify({ client_name, deal_value, status, close_date }),
     });
   } else {
     await fetch("http://localhost:5000/api/sales", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: getAuthHeaders(),
       body: JSON.stringify({ client_name, deal_value, status, close_date }),
     });
   }
@@ -68,6 +68,7 @@ async function deleteDeal(id) {
 
   await fetch(`http://localhost:5000/api/sales/${id}`, {
     method: "DELETE",
+    headers: getAuthHeaders(),
   });
 
   loadDeals();
@@ -79,7 +80,9 @@ let pageSize = 10;
 let filteredData = [];
 
 async function loadDeals() {
-  const res = await fetch("http://localhost:5000/api/sales");
+  const res = await fetch("http://localhost:5000/api/sales", {
+    headers: getAuthHeaders(),
+  });
   const data = await res.json();
   deals = data;
   filteredData = data;

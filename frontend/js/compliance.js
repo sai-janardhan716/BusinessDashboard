@@ -41,14 +41,14 @@ saveComp.onclick = async () => {
   if (editingId) {
     await fetch(`http://localhost:5000/api/compliance/${editingId}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: getAuthHeaders(),
       body: JSON.stringify({ doc_name, type, due_date, status })
     });
     editingId = null;
   } else {
     await fetch("http://localhost:5000/api/compliance", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: getAuthHeaders(),
       body: JSON.stringify({ doc_name, type, due_date, status })
     });
   }
@@ -64,7 +64,7 @@ function editComp(id) {
 
   cName.value = c.doc_name;
   cType.value = c.type;
-  cDue.value = c.due_date?.slice(0,10);
+  cDue.value = c.due_date?.slice(0, 10);
   cStatus.value = c.status;
 
   editingId = id;
@@ -77,7 +77,8 @@ async function deleteComp(id) {
   if (!confirm("Delete document?")) return;
 
   await fetch(`http://localhost:5000/api/compliance/${id}`, {
-    method: "DELETE"
+    method: "DELETE",
+    headers: getAuthHeaders()
   });
 
   loadCompliance();
@@ -90,7 +91,9 @@ let pageSize = 10;
 let filteredData = [];
 
 async function loadCompliance() {
-  const res = await fetch("http://localhost:5000/api/compliance");
+  const res = await fetch("http://localhost:5000/api/compliance", {
+    headers: getAuthHeaders()
+  });
   const data = await res.json();
   compData = data;
   filteredData = data;

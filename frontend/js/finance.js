@@ -48,7 +48,7 @@ saveFinance.onclick = async () => {
   } else {
     await fetch("http://localhost:5000/api/finance", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: getAuthHeaders(),
       body: JSON.stringify({
         type: currentType,
         amount,
@@ -83,6 +83,7 @@ async function deleteFinance(id) {
 
   await fetch(`http://localhost:5000/api/finance/${id}`, {
     method: "DELETE",
+    headers: getAuthHeaders(),
   });
 
   loadFinance();
@@ -163,7 +164,9 @@ let pageSize = 5;
 let filteredData = [];
 
 async function loadFinance() {
-  const res = await fetch("http://localhost:5000/api/finance");
+  const res = await fetch("http://localhost:5000/api/finance", {
+    headers: getAuthHeaders(),
+  });
   const data = await res.json();
   financeData = data;
   filteredData = data;

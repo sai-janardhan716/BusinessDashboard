@@ -37,14 +37,14 @@ saveEmp.onclick = async () => {
   if (editingEmpId) {
     await fetch(`http://localhost:5000/api/employees/${editingEmpId}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: getAuthHeaders(),
       body: JSON.stringify({ name, email, role, department, joined }),
     });
     editingEmpId = null;
   } else {
     await fetch("http://localhost:5000/api/employees", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: getAuthHeaders(),
       body: JSON.stringify({ name, email, role, department, joined }),
     });
   }
@@ -72,6 +72,7 @@ async function deleteEmp(id) {
 
   await fetch(`http://localhost:5000/api/employees/${id}`, {
     method: "DELETE",
+    headers: getAuthHeaders(),
   });
 
   loadEmployees();
@@ -83,7 +84,9 @@ let pageSize = 10;
 let filteredData = [];
 
 async function loadEmployees() {
-  const res = await fetch("http://localhost:5000/api/employees");
+  const res = await fetch("http://localhost:5000/api/employees", {
+    headers: getAuthHeaders(),
+  });
   const data = await res.json();
   empData = data;
   filteredData = data;

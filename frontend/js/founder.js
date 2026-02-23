@@ -32,7 +32,9 @@ async function loadFounder() {
 }
 
 async function fetchJSON(url) {
-  const r = await fetch("http://localhost:5000" + url);
+  const r = await fetch("http://localhost:5000" + url, {
+    headers: getAuthHeaders()
+  });
   return r.json();
 }
 

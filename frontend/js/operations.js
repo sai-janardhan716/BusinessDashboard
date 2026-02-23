@@ -40,14 +40,14 @@ saveOp.onclick = async () => {
   if (editingId) {
     await fetch(`http://localhost:5000/api/operations/${editingId}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: getAuthHeaders(),
       body: JSON.stringify({ item_name, category, status, owner }),
     });
     editingId = null;
   } else {
     await fetch("http://localhost:5000/api/operations", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: getAuthHeaders(),
       body: JSON.stringify({ item_name, category, status, owner }),
     });
   }
@@ -75,6 +75,7 @@ async function deleteOp(id) {
 
   await fetch(`http://localhost:5000/api/operations/${id}`, {
     method: "DELETE",
+    headers: getAuthHeaders(),
   });
 
   loadOps();
@@ -82,7 +83,9 @@ async function deleteOp(id) {
 
 
 async function loadOps() {
-  const res = await fetch("http://localhost:5000/api/operations");
+  const res = await fetch("http://localhost:5000/api/operations", {
+    headers: getAuthHeaders()
+  });
   const data = await res.json();
 
   opData = data;

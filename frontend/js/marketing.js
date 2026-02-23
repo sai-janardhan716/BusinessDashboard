@@ -43,7 +43,7 @@ saveCamp.onclick = async () => {
   if (editingId) {
     await fetch(`http://localhost:5000/api/marketing/${editingId}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: getAuthHeaders(),
       body: JSON.stringify({
         campaign_name, channel, spend, leads, conversions, start_date
       })
@@ -52,7 +52,7 @@ saveCamp.onclick = async () => {
   } else {
     await fetch("http://localhost:5000/api/marketing", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: getAuthHeaders(),
       body: JSON.stringify({
         campaign_name, channel, spend, leads, conversions, start_date
       })
@@ -73,7 +73,7 @@ function editCamp(id) {
   mSpend.value = c.spend;
   mLeads.value = c.leads;
   mConv.value = c.conversions;
-  mDate.value = c.start_date?.slice(0,10);
+  mDate.value = c.start_date?.slice(0, 10);
 
   editingId = id;
   openCampModal();
@@ -85,7 +85,8 @@ async function deleteCamp(id) {
   if (!confirm("Delete campaign?")) return;
 
   await fetch(`http://localhost:5000/api/marketing/${id}`, {
-    method: "DELETE"
+    method: "DELETE",
+    headers: getAuthHeaders(),
   });
 
   loadCampaigns();
@@ -94,7 +95,9 @@ async function deleteCamp(id) {
 
 
 async function loadCampaigns() {
-  const res = await fetch("http://localhost:5000/api/marketing");
+  const res = await fetch("http://localhost:5000/api/marketing", {
+    headers: getAuthHeaders(),
+  });
   const data = await res.json();
 
   campData = data;
