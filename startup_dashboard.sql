@@ -1,19 +1,9 @@
--- ============================================================
---  StartupOps — Full Database Schema
---  Database: startup_dashboard
--- ============================================================
-
 CREATE DATABASE IF NOT EXISTS startup_dashboard
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
 
 USE startup_dashboard;
 
--- ─────────────────────────────────────────────────────────────
--- 1. ROLES
---    1=Founder  2=Finance  3=HR  4=Marketing
---    5=Sales    6=Tech     7=Compliance
--- ─────────────────────────────────────────────────────────────
 CREATE TABLE roles (
   id   INT          NOT NULL AUTO_INCREMENT,
   name VARCHAR(50)  NOT NULL,
@@ -29,10 +19,6 @@ INSERT INTO roles (id, name) VALUES
   (6, 'Tech'),
   (7, 'Compliance');
 
--- ─────────────────────────────────────────────────────────────
--- 2. USERS
---    status: 'active' | 'pending_reset' | 'disabled'
--- ─────────────────────────────────────────────────────────────
 CREATE TABLE users (
   id            INT           NOT NULL AUTO_INCREMENT,
   name          VARCHAR(100)  NOT NULL,
@@ -45,9 +31,6 @@ CREATE TABLE users (
   CONSTRAINT fk_users_role FOREIGN KEY (role_id) REFERENCES roles (id)
 );
 
--- ─────────────────────────────────────────────────────────────
--- 3. EMPLOYEES
--- ─────────────────────────────────────────────────────────────
 CREATE TABLE employees (
   id         INT           NOT NULL AUTO_INCREMENT,
   name       VARCHAR(100)  NOT NULL,
@@ -59,9 +42,6 @@ CREATE TABLE employees (
   PRIMARY KEY (id)
 );
 
--- ─────────────────────────────────────────────────────────────
--- 4. FINANCE TRANSACTIONS
--- ─────────────────────────────────────────────────────────────
 CREATE TABLE finance_transactions (
   id          INT             NOT NULL AUTO_INCREMENT,
   type        VARCHAR(50)     NOT NULL,
@@ -72,9 +52,6 @@ CREATE TABLE finance_transactions (
   PRIMARY KEY (id)
 );
 
--- ─────────────────────────────────────────────────────────────
--- 5. MARKETING
--- ─────────────────────────────────────────────────────────────
 CREATE TABLE marketing (
   id            INT             NOT NULL AUTO_INCREMENT,
   campaign_name VARCHAR(150)    NOT NULL,
@@ -87,9 +64,6 @@ CREATE TABLE marketing (
   PRIMARY KEY (id)
 );
 
--- ─────────────────────────────────────────────────────────────
--- 6. OPERATIONS
--- ─────────────────────────────────────────────────────────────
 CREATE TABLE operations (
   id         INT          NOT NULL AUTO_INCREMENT,
   item_name  VARCHAR(150) NOT NULL,
@@ -100,9 +74,6 @@ CREATE TABLE operations (
   PRIMARY KEY (id)
 );
 
--- ─────────────────────────────────────────────────────────────
--- 7. PRODUCT
--- ─────────────────────────────────────────────────────────────
 CREATE TABLE product (
   id           INT          NOT NULL AUTO_INCREMENT,
   feature_name VARCHAR(150) NOT NULL,
@@ -114,9 +85,6 @@ CREATE TABLE product (
   PRIMARY KEY (id)
 );
 
--- ─────────────────────────────────────────────────────────────
--- 8. SALES
--- ─────────────────────────────────────────────────────────────
 CREATE TABLE sales (
   id          INT             NOT NULL AUTO_INCREMENT,
   client_name VARCHAR(150)    NOT NULL,
@@ -127,9 +95,6 @@ CREATE TABLE sales (
   PRIMARY KEY (id)
 );
 
--- ─────────────────────────────────────────────────────────────
--- 9. COMPLIANCE
--- ─────────────────────────────────────────────────────────────
 CREATE TABLE compliance (
   id         INT          NOT NULL AUTO_INCREMENT,
   doc_name   VARCHAR(150) NOT NULL,
